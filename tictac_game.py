@@ -17,15 +17,25 @@ def drawGrid():
     count = 0
     while count < 3:
         count+=1
-        drawRow()
+        drawRow(count)
         if count <=2:
             drawMid()
 
-def drawRow():
+def drawRow(rowNumber):
     print("\t  |   |  ")
 
 def drawMid():
     print("\t==|===|==")
 
+
+
+
+
+#Now I need draw row to take arguments X or O.
+#I think drawRow will take count, and look up position and attribute.
+#Position and attribute will be stored in a dict.
+
+#next I need to find a way to store information about the board so it can
+#be drawn with X's and O's. Ideally this will
 
 drawGrid()
