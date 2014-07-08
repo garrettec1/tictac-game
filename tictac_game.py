@@ -14,11 +14,12 @@
 #drawGrid will call the functions that draw individual rows
 def drawGrid():
     print()
-    drawRow()
-    drawMid()
-    drawRow()
-    drawMid()
-    drawRow()
+    count = 0
+    while count < 3:
+        count+=1
+        drawRow()
+        if count <=2:
+            drawMid()
 
 def drawRow():
     print("\t  |   |  ")
