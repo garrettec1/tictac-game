@@ -11,4 +11,20 @@
 # ==|===|==
 #   |   | X
 
+#drawGrid will call the functions that draw individual rows
 def drawGrid():
+    print()
+    drawRow()
+    drawMid()
+    drawRow()
+    drawMid()
+    drawRow()
+
+def drawRow():
+    print("\t  |   |  ")
+
+def drawMid():
+    print("\t==|===|==")
+
+
+drawGrid()
