@@ -11,6 +11,11 @@
 # ==|===|==
 #   |   | X
 
+
+#stores the state of the board in row:collum format
+boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',/
+             '3a':' ', '3b':' ', '3c':' '}
+
 #drawGrid will call the functions that draw individual rows
 def drawGrid():
     print()
