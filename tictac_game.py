@@ -18,7 +18,7 @@ boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
 
 #drawGrid will call the functions that draw individual rows
 def drawGrid():
-    print()
+
     count = 0
     while count < 3:
         count+=1
@@ -29,20 +29,24 @@ def drawGrid():
 
 #Needs to be refactored to build the string with game pieces.
 def drawRow(row):
+    if row == 1:
+        print("\n\t  a   b   c")
     row = str(row)
-    print("\t{} | {} | {}".format(boardInfo[row+'a'], boardInfo[row+'b'],\
-                                  boardInfo[row+'c']))
+    print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],\
+                                         boardInfo[row+'b'], boardInfo[row+'c']))
 
 def drawMid():
-    print("\t==|===|==")
-
-
-
-
+    print("\t  ==|===|==")
 
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
 #Position and attribute will be stored in a dict.
+
+#The game board needs a function that will update it, and I need a way
+# to get moves from the user. I think I will have to label the board with
+# coordinates, then ask for row and column. Individual function for update
+# board?
+
 
 
 
