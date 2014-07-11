@@ -20,6 +20,7 @@ boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
 def drawGrid():
 
     count = 0
+
     while count < 3:
         count+=1
         drawRow(count)
@@ -29,14 +30,33 @@ def drawGrid():
 
 #Needs to be refactored to build the string with game pieces.
 def drawRow(row):
+
     if row == 1:
         print("\n\t  a   b   c")
+
     row = str(row)
+
     print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],\
                                          boardInfo[row+'b'], boardInfo[row+'c']))
 
+
 def drawMid():
+
     print("\t  ==|===|==")
+
+
+def getMove():
+    print("It is your turn to move.")
+    row = str(input("Enter the row number. 1-3: "))
+    column = str(input("Enter the column: a-c: "))
+    move = (row+column).lower()
+    print(move)
+
+    return(move)
+
+
+def updateBoard():
+    return(null)
 
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
@@ -53,4 +73,7 @@ def drawMid():
 #next I need to find a way to store information about the board so it can
 #be drawn with X's and O's. Ideally this will
 
+drawGrid()
+
+move = getMove()
 drawGrid()
