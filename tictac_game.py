@@ -55,8 +55,9 @@ def getMove():
     return(move)
 
 
-def updateBoard():
-    return(null)
+def updateBoard(move):
+    boardInfo[move] = 'X'
+
 
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
@@ -76,4 +77,5 @@ def updateBoard():
 drawGrid()
 
 move = getMove()
+updateBoard(move)
 drawGrid()
