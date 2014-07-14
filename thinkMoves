@@ -1,0 +1,42 @@
+So I want this thing to recognize patterns.
+
+I have a board that looks like this:
+
+  a   b   c
+1   |   |  
+  ==|===|==
+2   |   |  
+  ==|===|==
+3   |   |  
+
+Stored like:
+boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ', '3a':' ', '3b':' ', '3c':' '} 
+
+The moves are slightly different if the computer goes first or second.
+
+For simplicity, I will describe the computer getting the first move first.
+
+For the first move of the game, the computer should always choose a corner.
+random?
+1a, 1c, 3a, 3c
+
+Whatever it chooses first, the second computer move should be the opposite corner.
+if 1a -> 3c, if 3a -> 1c, if 1c ->3a, if 3c -> 1a
+
+The priority is that it cannot be a place the human has moved, and it should block a human move if possible.
+
+How to make moves immutable? 
+
+I could program so it will get into the correct set of conditionals
+then look to see if the move is 'legal'. Seems inefficient.
+
+I could create a list of legal moves from the dictionary, and have the computer
+choose from already legal moves.
+(Non working psudo code for thinking)
+	legalMoves.append(boardInfo.keys())
+	for spaces in board info
+		if key Used
+			leagalMove.delete
+It would be beter to initialize the list at the beginning of the game, and remove moves as they are chosen.
+I will have to do some refactoring to implement, but I think this is the best solution.
+	(look up how to remove specific elements of a list without knowing index. Search-pop?)
