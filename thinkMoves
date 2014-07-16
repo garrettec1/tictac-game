@@ -40,3 +40,20 @@ choose from already legal moves.
 It would be beter to initialize the list at the beginning of the game, and remove moves as they are chosen.
 I will have to do some refactoring to implement, but I think this is the best solution.
 	(look up how to remove specific elements of a list without knowing index. Search-pop?)
+
+How to check for two in a row? If the opponents next move will result in a three in a row, the placement must be to block, 
+I would need to check and see if doing a block is a possible move. 
+
+How about reversing the order. Look to see if any possible moves will A)win the game. B) block the opponent from winning.
+This does not need to be run until two full turns have passed. 
+
+Winning the game and blocking are essentially the same condition. Useful?
+
+If I impliment a chance the computer will go second, it will have to play differently. I am not sure if there is an optimum strategy 
+for going second. Probably something like middle, block and try for three, win or block the remainder of the game. 
+
+If len(possible) == 9 
+	randomly pick a corner 
+
+
+
