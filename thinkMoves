@@ -57,3 +57,28 @@ If len(possible) == 9
 
 
 
+Describing adjacency and rows.
+I have been thinking alot about it, but I think the most efficient way to code for win conditions is to 
+actually hard code them in, Normally hard coding is something I really try to avoid, but the set of
+possible 3 in a row is: 3 rows 3 collumns 2 diagonals. Pretty limited.
+I could write a useless but fun optimization for this where it checks to see if a row or collumn 
+has an opposing piece in it thus is "blockd". 
+...
+Actually that might be a neat way to go about programming it. 
+
+
+The other way I was thinking about was trying to describe adjacency. For example, 3c is adjacent to
+to 2c, 2b, and 3b. Win conditions would be met at 1a, 1c, and 3a. 2c correlates to 1c, 2b to 1a, 
+3b to 1a.
+
+The way I am talking about handling it does not really take separated corners into account.
+Like a X on 1a and 3c.
+
+I could set it up so that it starts at a position, looks at all the the possible completions
+and finds if two of three slots are filled. Regardless of how I program it, this will be 
+important.
+
+When you really get down to it, coding it this way would be a much less elegent and less efficient 
+way to describe the 8 possible winning moves. Makes me kind of sad, but I figure I will get plenty
+of chances to solve interesting problems in interesting ways later. :)
+
