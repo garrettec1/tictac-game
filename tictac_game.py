@@ -16,6 +16,8 @@
 boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
              '3a':' ', '3b':' ', '3c':' '}
 
+legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+
 #drawGrid will call the functions that draw individual rows
 def drawGrid():
 
@@ -46,17 +48,30 @@ def drawMid():
 
 
 def getMove():
-    print("It is your turn to move.")
-    row = str(input("Enter the row number. 1-3: "))
-    column = str(input("Enter the column: a-c: "))
-    move = (row+column).lower()
-    print(move)
+
+    looping = True
+
+    while looping:
+        print("It is your turn to move.")
+        row = str(input("Enter the row number. 1-3: "))
+        column = str(input("Enter the column: a-c: "))
+        move = (row+column).lower()
+
+        if move not in legalMoves:
+            print('That is not a legal move')
+        else:
+            looping = False
+    legalMoves.remove(move)
 
     return(move)
 
 
+def computerMove(boardInfo):
+    return(null)
+
+
 def updateBoard(move):
-    boardInfo[move] = 'X'
+    boardInfo[move]= 'X'
 
 
 #Now I need draw row to take arguments X or O.
@@ -68,14 +83,18 @@ def updateBoard(move):
 # coordinates, then ask for row and column. Individual function for update
 # board?
 
+#Well, instead of preserving the board, I could just redraw the board from
+# the move set each time. Not sure that will get me anything right now.
 
-
+#Going to need to mock up the computer move to see how I want it to function.
 
 #next I need to find a way to store information about the board so it can
 #be drawn with X's and O's. Ideally this will
 
 drawGrid()
-
-move = getMove()
-updateBoard(move)
-drawGrid()
+gaming = 0
+while gaming<3:
+    gaming += 3
+    move = getMove()
+    updateBoard(move)
+    drawGrid()
