@@ -66,14 +66,40 @@ def getMove():
     return(move)
 
 
-def computerMove(boardInfo):
-    return(null)
+def computerMove(boardInfo, legalMoves, turn):
+    if turn == 0:
+        move = '1a'
+    elif turn == 2:
+        move = '3c'
+    else:
+        move = calcMove(boardInfo, legalMoves, turn)
+    return(move)
+
+def calcMove(boardInfo, legalMoves, turn):
+
+    return('2b')
+
+def updateBoard(move, turn):
+
+    print(turn)
+    if turn % 2 != 0:
+        boardInfo[move]= 'X'
+    else:
+        boardInfo[move] = 'O'
 
 
-def updateBoard(move):
-    boardInfo[move]= 'X'
+drawGrid()
+gaming = 0
+while gaming<3:
 
-
+    move = computerMove(boardInfo, legalMoves, gaming)
+    gaming += 1
+    updateBoard(move, gaming)
+    drawGrid()
+    gaming+=1
+    move = getMove()
+    updateBoard(move,gaming)
+    drawGrid()
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
 #Position and attribute will be stored in a dict.
@@ -90,11 +116,3 @@ def updateBoard(move):
 
 #next I need to find a way to store information about the board so it can
 #be drawn with X's and O's. Ideally this will
-
-drawGrid()
-gaming = 0
-while gaming<3:
-    gaming += 3
-    move = getMove()
-    updateBoard(move)
-    drawGrid()
