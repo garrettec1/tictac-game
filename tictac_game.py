@@ -67,17 +67,53 @@ def getMove():
 
 
 def computerMove(boardInfo, legalMoves, turn):
-    if turn == 0:
+    if turn == 1:
         move = '1a'
-    elif turn == 2:
+    elif turn == 3:
         move = '3c'
     else:
         move = calcMove(boardInfo, legalMoves, turn)
+
+    legalMoves.remove(move)
     return(move)
+
+win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'), ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 
 def calcMove(boardInfo, legalMoves, turn):
 
-    return('2b')
+
+    move = winBlock('X',win)
+    if move not in legalMoves:
+        move = winBlock('O',win)
+
+    return(move)
+
+def winBlock(piece,win):
+
+
+    for three_in_a_row in win:
+        empty = 0
+        counter = 0
+        for square in three_in_a_row:
+            if boardInfo[square] == piece:
+                counter+=1
+                print(square,counter)
+            if boardInfo[square] == ' ':
+                empty = square
+            if counter == 2 and empty != ' ':
+                move = empty
+                break
+
+    print(piece,move)
+    return(move)
+
+
+#The first thing that needs to happen after turn 3 is checking for win
+#conditions. First I need to describe win conditions in a list of tipples,
+#then write a function to check for them.
+
+#I think I want to decribe a row as three positions, and check to see if two
+#of three positions are filled.
 
 def updateBoard(move, turn):
 
@@ -87,19 +123,22 @@ def updateBoard(move, turn):
     else:
         boardInfo[move] = 'O'
 
-
-drawGrid()
-gaming = 0
-while gaming<3:
-
-    move = computerMove(boardInfo, legalMoves, gaming)
-    gaming += 1
-    updateBoard(move, gaming)
+def main():
     drawGrid()
-    gaming+=1
-    move = getMove()
-    updateBoard(move,gaming)
-    drawGrid()
+    gaming = 1
+    while gaming<8:
+
+        move = computerMove(boardInfo, legalMoves, gaming)
+        updateBoard(move, gaming)
+        drawGrid()
+        gaming+=1
+        move = getMove()
+        updateBoard(move,gaming)
+        drawGrid()
+        gaming += 1
+
+
+main()
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
 #Position and attribute will be stored in a dict.
