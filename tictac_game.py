@@ -72,25 +72,26 @@ def computerMove(boardInfo, legalMoves, turn):
     elif turn == 3:
         move = '3c'
     else:
-        move = calcMove(boardInfo, legalMoves, turn)
+        move = calcMove(boardInfo)
 
     legalMoves.remove(move)
     return(move)
 
-win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'), ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
+win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),\
+       ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 
-def calcMove(boardInfo, legalMoves, turn):
+def calcMove(boardInfo):
 
 
-    move = winBlock('X',win)
+    move = winBlock('X')
     if move not in legalMoves:
-        move = winBlock('O',win)
+        move = winBlock('O')
 
     return(move)
 
 
 
-def winBlock(piece,win):
+def winBlock(piece):
 
     move = 0
     for three_in_a_row in win:
@@ -99,7 +100,6 @@ def winBlock(piece,win):
         for square in three_in_a_row:
             if boardInfo[square] == piece:
                 counter+=1
-                print(square,counter)
             if boardInfo[square] == ' ':
                 empty = square
             if counter == 2 and empty != ' ':
@@ -107,7 +107,6 @@ def winBlock(piece,win):
             if move in legalMoves:
                 break
 
-    print(piece,move)
     return(move)
 
 
