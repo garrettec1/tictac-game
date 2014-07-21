@@ -88,9 +88,11 @@ def calcMove(boardInfo, legalMoves, turn):
 
     return(move)
 
+
+
 def winBlock(piece,win):
 
-
+    move = 0
     for three_in_a_row in win:
         empty = 0
         counter = 0
@@ -102,6 +104,7 @@ def winBlock(piece,win):
                 empty = square
             if counter == 2 and empty != ' ':
                 move = empty
+            if move in legalMoves:
                 break
 
     print(piece,move)
