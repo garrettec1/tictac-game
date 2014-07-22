@@ -13,6 +13,12 @@
 
 
 #stores the state of the board in row:collum format
+
+import time
+
+
+
+
 boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
              '3a':' ', '3b':' ', '3c':' '}
 
@@ -62,17 +68,22 @@ def getMove():
 
     looping = True
 
+    time.sleep(1.5)
+
+    print("\n\tIt is your turn to move.")
+
+    time.sleep(1)
+
     while looping:
 
-        print("\nIt is your turn to move.")
-
-        row = str(input("\nEnter the row number. 1-3: "))
-        column = str(input("\nEnter the column: a-c: "))
+        row = str(input("\n\tEnter the row number. 1-3: "))
+        column = str(input("\n\tEnter the column: a-c: "))
 
         move = (row+column).lower()
 
         if move not in legalMoves:
-            print('\nThat is not a legal move')
+            time.sleep(.9)
+            print('\n\n\tThat is not a legal move.\n')
 
         else:
             looping = False
@@ -179,15 +190,34 @@ def updateBoard(move, turn):
 
 def main():
 
+
+    print('\n\tWelcome to tic-tac-toe!.')
+
+    time.sleep(1.5)
+
+    print('\n\tHere is the game board')
+
+    time.sleep(1)
+
     drawGrid()
+
+    print("\n\tThe computer moves first.")
+
+    time.sleep(2)
 
     gaming = 1
     victory = False
 
     while gaming<10:
 
+        if gaming > 2:
+            time.sleep(1)
+            print("\n\tIt is the computer turn.")
+
         move = computerMove(boardInfo, legalMoves, gaming)
         updateBoard(move, gaming)
+
+        time.sleep(1.8)
 
         drawGrid()
         gaming+=1
@@ -199,14 +229,18 @@ def main():
                 break
 
         if gaming == 10:
-            print("It's a TIE!")
+            print("\nIt's a TIE!")
             break
 
         move = getMove()
         updateBoard(move,gaming)
 
+        time.sleep(2)
+
         drawGrid()
         gaming += 1
+
+        time.sleep(2)
 
         if gaming > 5:
 
@@ -218,9 +252,11 @@ def main():
 
 main()
 
-print("/nThanks a whole lot for playing!")
+print("\nThanks a whole lot for playing!")
 
-
+#The game works! Now I need to import sleep so everything does not happen
+# instantly. Formatting for pretty Then I will look a doing a coin flip for
+# who goes first. That might take some substantial thinking.
 
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
