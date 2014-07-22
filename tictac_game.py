@@ -25,6 +25,7 @@ win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),\
 #drawGrid will call the functions that draw individual rows
 def drawGrid():
 
+
     count = 0
 
     while count < 3:
@@ -39,6 +40,7 @@ def drawGrid():
 
 def drawRow(row):
 
+
     if row == 1:
         print("\n\t  a   b   c")
 
@@ -50,11 +52,13 @@ def drawRow(row):
 
 def drawMid():
 
+
     print("\t  ==|===|==")
 
 
 
 def getMove():
+
 
     looping = True
 
@@ -81,6 +85,7 @@ def getMove():
 
 
 def computerMove(boardInfo, legalMoves, turn):
+
 
     if turn == 1:
         move = '1a'
@@ -113,6 +118,7 @@ def calcMove(boardInfo):
 
 def winBlock(piece):
 
+
     move = 0
 
     for three_in_a_row in win:
@@ -124,10 +130,13 @@ def winBlock(piece):
 
             if boardInfo[square] == piece:
                 counter+=1
+
             if boardInfo[square] == ' ':
                 empty = square
+
             if counter == 2 and empty != ' ':
                 move = empty
+
             if move in legalMoves:
                 break
 
@@ -148,18 +157,17 @@ def ftw(piece):
 
             if boardInfo[squares] == piece:
                 counter += 1
+
             if counter == 3:
                 victory = True
                 break
 
 
-    return(victory,piece)
+    return(victory)
 
 
 
 def updateBoard(move, turn):
-
-    print(turn)
 
     if turn % 2 != 0:
         boardInfo[move]= 'X'
@@ -174,8 +182,9 @@ def main():
     drawGrid()
 
     gaming = 1
+    victory = False
 
-    while gaming<9:
+    while gaming<10:
 
         move = computerMove(boardInfo, legalMoves, gaming)
         updateBoard(move, gaming)
@@ -183,14 +192,36 @@ def main():
         drawGrid()
         gaming+=1
 
+        if gaming > 4:
+
+            if ftw('X'):
+                print("\nThe X's have won the game!")
+                break
+
+        if gaming == 10:
+            print("It's a TIE!")
+            break
+
         move = getMove()
         updateBoard(move,gaming)
 
         drawGrid()
         gaming += 1
 
+        if gaming > 5:
+
+            if ftw('O'):
+                print("\nThe O's have won the game!")
+                break
+
+
 
 main()
+
+print("/nThanks a whole lot for playing!")
+
+
+
 #Now I need draw row to take arguments X or O.
 #I think drawRow will take count, and look up position and attribute.
 #Position and attribute will be stored in a dict.
