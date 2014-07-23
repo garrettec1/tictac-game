@@ -15,7 +15,8 @@
 #stores the state of the board in row:collum format
 
 import time
-
+import random
+random.seed()
 
 
 
@@ -26,6 +27,8 @@ legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
 
 win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),\
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
+
+firstMoves =['1a','1c','3a','3c']
 
 
 #drawGrid will call the functions that draw individual rows
@@ -88,6 +91,9 @@ def getMove():
         else:
             looping = False
 
+    if move in firstMoves:
+        firstMoves.remove(move)
+
     legalMoves.remove(move)
 
 
@@ -98,21 +104,30 @@ def getMove():
 def computerMove(boardInfo, legalMoves, turn):
 
 
+
+
     if turn == 1:
-        move = '1a'
+        move = random.choice(firstMoves)
+        firstMoves.remove(move)
 
     elif turn == 3:
-        move = '3c'
+        move = random.choice(firstMoves)
+        firstMoves.remove(move)
 
     else:
         move = calcMove(boardInfo)
+
+    if move not in legalMoves:
+        move = random.choice(firstMoves)
 
     legalMoves.remove(move)
 
 
     return(move)
 
-
+#what is the best way to deal with the computers second move? currently the
+# game will crash if the human chooses to move the opposite corner from the
+# computer. .remove will only work if it is in the list. Oh conditional!
 
 def calcMove(boardInfo):
 
@@ -125,7 +140,7 @@ def calcMove(boardInfo):
 
     return(move)
 
-
+#okay... so calcMove fails if there is no blockable move or winning move.
 
 def winBlock(piece):
 
@@ -195,15 +210,17 @@ def main():
 
     time.sleep(1.5)
 
-    print('\n\tHere is the game board')
+    print('\n\tHere is the game board.')
 
     time.sleep(1)
 
     drawGrid()
 
+    time.sleep(2)
+
     print("\n\tThe computer moves first.")
 
-    time.sleep(2)
+    time.sleep(1)
 
     gaming = 1
     victory = False
