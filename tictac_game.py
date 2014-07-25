@@ -2,17 +2,6 @@
 #Tic-Tac-Toe game
 
 
-#The first thing I want to do, is build a display box
-
-#Style decision
-# X |   |
-# ==|===|==
-#   | X |
-# ==|===|==
-#   |   | X
-
-
-#stores the state of the board in row:collum format
 
 import time
 import random
@@ -20,18 +9,37 @@ random.seed()
 
 
 
+###########################################################################
+#   GLOBAL VARIABLE ASSIGNMENT
+###########################################################################
+
+#stores the state of the board for display
 boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
              '3a':' ', '3b':' ', '3c':' '}
 
+#used moves are removed from this list as they are made, so I don't have to
+# read the dictionary every time a move is calculated.
 legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
 
+#This is a list of three tuples of all the win conditions. Used to check first
+# for winning moves, and second for blocking moves.
 win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),\
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 
+#The four corners are the best opening moves for the computer. This list
+# depopulates as the moves are used like leagalMoves.
 firstMoves =['1a','1c','3a','3c']
 
 
-#drawGrid will call the functions that draw individual rows
+
+###########################################################################
+# : drawGrid :
+###########################################################################
+# Takes nothing
+# Calls drawRow, drawMid
+# Draws the game board
+
+
 def drawGrid():
 
 
@@ -47,6 +55,13 @@ def drawGrid():
 
 
 
+###########################################################################
+# : drawRow :
+###########################################################################
+# Takes an arguement called row from drawGrid (count)
+# Draws the rows and grid lables. Builds the strings to print with .format
+# calling boardInfo.
+
 def drawRow(row):
 
 
@@ -59,12 +74,24 @@ def drawRow(row):
                                      boardInfo[row+'b'], boardInfo[row+'c']))
 
 
+###########################################################################
+# : drawMid :
+###########################################################################
+# Takes nothing
+# drawMid can draw row can probably be refactored into drawBoard without confusion
+
 def drawMid():
 
 
     print("\t  ==|===|==")
 
 
+###########################################################################
+# : getMove :
+###########################################################################
+# Takes nothing.
+# Returns the Human Move as a string: eg. '1a'
+# Gets input from player and checks if the move is legal.
 
 def getMove():
 
