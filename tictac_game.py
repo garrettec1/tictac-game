@@ -51,7 +51,7 @@ def drawGrid():
         drawRow(count)
 
         if count <=2:
-            drawMid()
+            print("\t  ==|===|==")
 
 
 
@@ -73,17 +73,6 @@ def drawRow(row):
     print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],\
                                      boardInfo[row+'b'], boardInfo[row+'c']))
 
-
-###########################################################################
-# : drawMid :
-###########################################################################
-# Takes nothing
-# drawMid can draw row can probably be refactored into drawBoard without confusion
-
-def drawMid():
-
-
-    print("\t  ==|===|==")
 
 
 ###########################################################################
