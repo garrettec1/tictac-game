@@ -96,10 +96,9 @@ def getMove():
 
     while looping:
 
-        row = str(input("\n\tEnter the row number. 1-3: "))
-        column = str(input("\n\tEnter the column: a-c: "))
+        moving =  str(input("\n\tEnter your move. eg. 1a or 3c: "))
 
-        move = (row+column).lower()
+        move = moving.lower()
 
         if move not in legalMoves:
             time.sleep(1)
