@@ -62,6 +62,7 @@ def drawGrid():
 # Draws the rows and grid lables. Builds the strings to print with .format
 # calling boardInfo.
 
+
 def drawRow(row):
 
 
@@ -82,6 +83,7 @@ def drawRow(row):
 # Returns the Human Move as a string: eg. '1a'
 # Gets input from player and checks if the move is legal.
 # Depopulates legalMoves and/or firstMoves.
+
 
 def getMove():
 
@@ -114,6 +116,8 @@ def getMove():
 
 
     return(move)
+
+
 
 ###########################################################################
 # :computerMove :
@@ -161,8 +165,8 @@ def calcMove():
     if move not in legalMoves:
         move = winBlock('O')
 
-    if move not in legalMoves:
-        move = random.choice(firstMoves)
+        if move not in legalMoves:
+            move = random.choice(firstMoves)
 
 
     return(move)
@@ -193,7 +197,7 @@ def winBlock(piece):
             if boardInfo[square] == piece:
                 counter+=1
 
-            elif boardInfo[square] == ' ':
+            if boardInfo[square] == ' ':
                 empty = square
 
             if counter == 2 and empty != ' ':
@@ -238,19 +242,12 @@ def ftw(piece):
 ###########################################################################
 # : updateBoard :
 ###########################################################################
-# Takes move, a string '1a' and turn from main.
-# If the turn is not even it places an 'X', otherwise it places an 'O'
-# This function should be altered to take move and piece for consistency and
-#   to make the game less sensitive to who goes first. (coin flip)
+# Takes move, a string '1a' and piece from main.
 
 
-def updateBoard(move, turn):
+def updateBoard(move, piece):
 
-    if turn % 2 != 0:
-        boardInfo[move]= 'X'
-
-    else:
-        boardInfo[move] = 'O'
+    boardInfo[move] = piece
 
 
 
@@ -263,23 +260,21 @@ def updateBoard(move, turn):
 def main():
 
 
-    s = time.sleep(1)
-
     print('\n\tWelcome to tic-tac-toe!.')
 
-    s
+    time.sleep(1)
 
     print('\n\tHere is the game board.')
 
-    s
+    time.sleep(1)
 
     drawGrid()
 
-    s
+    time.sleep(1)
 
     print("\n\tThe computer moves first.")
 
-    s
+    time.sleep(1)
 
     gaming = 1
     victory = False
@@ -287,14 +282,14 @@ def main():
     while gaming<10:
 
         if gaming > 2:
-            s
+            time.sleep(1)
             print("\n\tIt is the computer turn.")
 
 
         move = computerMove(gaming)
-        updateBoard(move, gaming)
+        updateBoard(move, 'X')
 
-        s
+        time.sleep(1)
 
         drawGrid()
         gaming+=1
@@ -302,27 +297,30 @@ def main():
         if gaming > 4:
 
             if ftw('X'):
+                time.sleep(2.5)
                 print("\nThe X's have won the game!")
                 break
 
         if gaming == 10:
+            time.sleep(1)
             print("\nIt's a TIE!")
             break
 
 
         move = getMove()
-        updateBoard(move,gaming)
+        updateBoard(move, 'O')
 
-        s
+        time.sleep(1)
 
         drawGrid()
         gaming += 1
 
-        s
+        time.sleep(1)
 
         if gaming > 5:
 
             if ftw('O'):
+                time.sleep(2.5)
                 print("\nThe O's have won the game!")
                 break
 
