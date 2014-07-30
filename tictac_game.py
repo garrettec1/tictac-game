@@ -10,7 +10,7 @@ random.seed()
 
 
 ###########################################################################
-#   GLOBAL VARIABLE ASSIGNMENT
+# GLOBAL VARIABLE ASSIGNMENT
 ###########################################################################
 
 #stores the state of the board for display
@@ -51,7 +51,7 @@ def drawGrid():
         drawRow(count)
 
         if count <=2:
-            print("\t  ==|===|==")
+            print("\t ==|===|==")
 
 
 
@@ -67,7 +67,7 @@ def drawRow(row):
 
 
     if row == 1:
-        print("\n\t  a   b   c")
+        print("\n\t a b c")
 
     row = str(row)
 
@@ -98,7 +98,7 @@ def getMove():
 
     while looping:
 
-        moving =  str(input("\n\tEnter your move. eg. 1a or 3c: "))
+        moving = str(input("\n\tEnter your move. eg. 1a or 3c: "))
 
         move = moving.lower()
 
@@ -153,10 +153,9 @@ def computerMove(turn):
 ###########################################################################
 # Takes nothing.
 # Calls winBlock twice. First to find the winning move as the computer, if that
-#   does not return a valid move, it finds a move to block a winning move.
+# does not return a valid move, it finds a move to block a winning move.
 # If there are no winning moves or moves to be blocked. The computer takes the
-#   remaining corner.
-
+# remaining corner.
 
 def calcMove():
 
@@ -179,8 +178,8 @@ def calcMove():
 ###########################################################################
 # Takes piece passed from calcMove, a string 'X' or 'O'.
 # Uses a for loop to pull 3 tuples of win conditions from win[]
-#   then a for loop to check the state of each location, and place a piece
-#   in the empty space.
+# then a for loop to check the state of each location, and place a piece
+# in the empty space.
 
 
 def winBlock(piece):
@@ -253,7 +252,7 @@ def updateBoard(move, piece):
 
 
 ###########################################################################
-# |=========================||    MAIN    ||=========================|
+# |=========================|| MAIN ||=========================|
 ###########################################################################
 # Runs the program.
 
@@ -308,7 +307,7 @@ def main():
             break
 
 
-
+        move = getMove()
         updateBoard(move, 'O')
 
         time.sleep(1)
