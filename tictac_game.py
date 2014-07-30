@@ -2,17 +2,6 @@
 #Tic-Tac-Toe game
 
 
-#The first thing I want to do, is build a display box
-
-#Style decision
-# X |   |
-# ==|===|==
-#   | X |
-# ==|===|==
-#   |   | X
-
-
-#stores the state of the board in row:collum format
 
 import time
 import random
@@ -20,18 +9,37 @@ random.seed()
 
 
 
+###########################################################################
+#   GLOBAL VARIABLE ASSIGNMENT
+###########################################################################
+
+#stores the state of the board for display
 boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
              '3a':' ', '3b':' ', '3c':' '}
 
+#used moves are removed from this list as they are made, so I don't have to
+# read the dictionary every time a move is calculated.
 legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
 
+#This is a list of three tuples of all the win conditions. Used to check first
+# for winning moves, and second for blocking moves.
 win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),\
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 
+#The four corners are the best opening moves for the computer. This list
+# depopulates as the moves are used like leagalMoves.
 firstMoves =['1a','1c','3a','3c']
 
 
-#drawGrid will call the functions that draw individual rows
+
+###########################################################################
+# : drawGrid :
+###########################################################################
+# Takes nothing
+# Calls drawRow, drawMid
+# Draws the game board
+
+
 def drawGrid():
 
 
@@ -43,8 +51,16 @@ def drawGrid():
         drawRow(count)
 
         if count <=2:
-            drawMid()
+            print("\t  ==|===|==")
 
+
+
+###########################################################################
+# : drawRow :
+###########################################################################
+# Takes an arguement called row from drawGrid (count)
+# Draws the rows and grid lables. Builds the strings to print with .format
+# calling boardInfo.
 
 
 def drawRow(row):
@@ -59,11 +75,14 @@ def drawRow(row):
                                      boardInfo[row+'b'], boardInfo[row+'c']))
 
 
-def drawMid():
 
-
-    print("\t  ==|===|==")
-
+###########################################################################
+# : getMove :
+###########################################################################
+# Takes nothing.
+# Returns the Human Move as a string: eg. '1a'
+# Gets input from player and checks if the move is legal.
+# Depopulates legalMoves and/or firstMoves.
 
 
 def getMove():
@@ -71,7 +90,7 @@ def getMove():
 
     looping = True
 
-    time.sleep(1.5)
+    time.sleep(1)
 
     print("\n\tIt is your turn to move.")
 
@@ -79,13 +98,12 @@ def getMove():
 
     while looping:
 
-        row = str(input("\n\tEnter the row number. 1-3: "))
-        column = str(input("\n\tEnter the column: a-c: "))
+        moving =  str(input("\n\tEnter your move. eg. 1a or 3c: "))
 
-        move = (row+column).lower()
+        move = moving.lower()
 
         if move not in legalMoves:
-            time.sleep(.9)
+            time.sleep(1)
             print('\n\n\tThat is not a legal move.\n')
 
         else:
@@ -101,7 +119,15 @@ def getMove():
 
 
 
-def computerMove(boardInfo, legalMoves, turn):
+###########################################################################
+# :computerMove :
+###########################################################################
+# Takes turn as gaming variable from main.
+# The first if and elif handle the first two computer moves in the game.
+# calcMove handles all other moves.
+
+
+def computerMove(turn):
 
 
     if turn == 1:
@@ -113,17 +139,26 @@ def computerMove(boardInfo, legalMoves, turn):
         firstMoves.remove(move)
 
     else:
-        move = calcMove(boardInfo)
-
-    if move not in legalMoves:
-        move = random.choice(firstMoves)
+        move = calcMove()
 
     legalMoves.remove(move)
 
 
     return(move)
 
-def calcMove(boardInfo):
+
+
+###########################################################################
+# : calcMove :
+###########################################################################
+# Takes nothing.
+# Calls winBlock twice. First to find the winning move as the computer, if that
+#   does not return a valid move, it finds a move to block a winning move.
+# If there are no winning moves or moves to be blocked. The computer takes the
+#   remaining corner.
+
+
+def calcMove():
 
 
     move = winBlock('X')
@@ -131,9 +166,21 @@ def calcMove(boardInfo):
     if move not in legalMoves:
         move = winBlock('O')
 
+        if move not in legalMoves:
+            move = random.choice(firstMoves)
+
 
     return(move)
 
+
+
+###########################################################################
+# : winBlock :
+###########################################################################
+# Takes piece passed from calcMove, a string 'X' or 'O'.
+# Uses a for loop to pull 3 tuples of win conditions from win[]
+#   then a for loop to check the state of each location, and place a piece
+#   in the empty space.
 
 
 def winBlock(piece):
@@ -165,6 +212,13 @@ def winBlock(piece):
 
 
 
+###########################################################################
+# : ftw : (For The Win)
+###########################################################################
+# Takes piece from main. A string 'X' or 'O'
+# Prints to screen and Returns victory Bool as True if the game has been won.
+
+
 def ftw(piece):
 
     victory = False
@@ -186,15 +240,22 @@ def ftw(piece):
     return(victory)
 
 
+###########################################################################
+# : updateBoard :
+###########################################################################
+# Takes move, a string '1a' and piece from main.
 
-def updateBoard(move, turn):
 
-    if turn % 2 != 0:
-        boardInfo[move]= 'X'
+def updateBoard(move, piece):
 
-    else:
-        boardInfo[move] = 'O'
+    boardInfo[move] = piece
 
+
+
+###########################################################################
+# |=========================||    MAIN    ||=========================|
+###########################################################################
+# Runs the program.
 
 
 def main():
@@ -202,7 +263,7 @@ def main():
 
     print('\n\tWelcome to tic-tac-toe!.')
 
-    time.sleep(1.5)
+    time.sleep(1)
 
     print('\n\tHere is the game board.')
 
@@ -210,7 +271,7 @@ def main():
 
     drawGrid()
 
-    time.sleep(2)
+    time.sleep(1)
 
     print("\n\tThe computer moves first.")
 
@@ -225,10 +286,11 @@ def main():
             time.sleep(1)
             print("\n\tIt is the computer turn.")
 
-        move = computerMove(boardInfo, legalMoves, gaming)
-        updateBoard(move, gaming)
 
-        time.sleep(1.8)
+        move = computerMove(gaming)
+        updateBoard(move, 'X')
+
+        time.sleep(1)
 
         drawGrid()
         gaming+=1
@@ -236,28 +298,30 @@ def main():
         if gaming > 4:
 
             if ftw('X'):
-                time.sleep(.5)
-                print("\n\tThe X's have won the game!")
+                time.sleep(2.5)
+                print("\nThe X's have won the game!")
                 break
 
         if gaming == 10:
-            time.sleep(.5)
-            print("\n\tIt's a TIE!")
+            time.sleep(1)
+            print("\nIt's a TIE!")
             break
 
-        move = getMove()
-        updateBoard(move,gaming)
 
-        time.sleep(2)
+
+        updateBoard(move, 'O')
+
+        time.sleep(1)
 
         drawGrid()
         gaming += 1
 
-        time.sleep(2)
+        time.sleep(1)
 
         if gaming > 5:
 
             if ftw('O'):
+                time.sleep(2.5)
                 print("\nThe O's have won the game!")
                 break
 
