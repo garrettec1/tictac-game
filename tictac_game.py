@@ -51,7 +51,7 @@ def drawGrid():
         drawRow(count)
 
         if count <=2:
-            print("\t ==|===|==")
+            print("\t  ==|===|==")
 
 
 
@@ -67,7 +67,7 @@ def drawRow(row):
 
 
     if row == 1:
-        print("\n\t a b c")
+        print("\n\t  a   b   c")
 
     row = str(row)
 
