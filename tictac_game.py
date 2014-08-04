@@ -33,6 +33,28 @@ firstMoves =['1a','1c','3a','3c']
 
 
 ###########################################################################
+# : coinFlip :
+###########################################################################
+# Who knows?
+
+def coinFlip():
+
+    print('Let\'s flip a coin to see who goes first')
+    called = str(input("\n\tHeads or tails? h or t: ")).lower()
+    print(called)
+    coin = random.choice('h' 't')
+    print(coin)
+    print(coin)
+    if called == coin:
+        print("You are going first.")
+        turn = 'first'
+    else:
+        print("Bad luck. You go second.")
+        turn = 'second'
+
+    return(turn)
+
+###########################################################################
 # : drawGrid :
 ###########################################################################
 # Takes nothing
@@ -326,6 +348,6 @@ def main():
 
 
 
-main()
-
+#main()
+coinFlip()
 print("\nThanks a whole lot for playing!")
