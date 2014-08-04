@@ -41,10 +41,8 @@ def coinFlip():
 
     print('Let\'s flip a coin to see who goes first')
     called = str(input("\n\tHeads or tails? h or t: ")).lower()
-    print(called)
     coin = random.choice('h' 't')
-    print(coin)
-    print(coin)
+
     if called == coin:
         print("You are going first.")
         turn = 'first'
@@ -293,8 +291,15 @@ def main():
     drawGrid()
 
     time.sleep(1)
+    #turn = coinFlip()
+    turn = 'first'
 
-    print("\n\tThe computer moves first.")
+    if turn == 'first':
+        human_piece = 'X'
+        comp_piece = 'O'
+    else:
+        human_piece = 'O'
+        comp_piece = 'X'
 
     time.sleep(1)
 
@@ -307,14 +312,14 @@ def main():
             time.sleep(1)
             print("\n\tIt is the computer turn.")
 
+        if turn != 'first':
+            move = computerMove(gaming)
+            updateBoard(move, 'X')
 
-        move = computerMove(gaming)
-        updateBoard(move, 'X')
+            time.sleep(1)
 
-        time.sleep(1)
-
-        drawGrid()
-        gaming+=1
+            drawGrid()
+            gaming+=1
 
         if gaming > 4:
 
@@ -346,8 +351,8 @@ def main():
                 print("\nThe O's have won the game!")
                 break
 
+        turn = 'none'
 
 
-#main()
-coinFlip()
+main()
 print("\nThanks a whole lot for playing!")
