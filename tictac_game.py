@@ -91,7 +91,7 @@ def drawRow(row):
 
     row = str(row)
 
-    print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],\
+    print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],
                                      boardInfo[row+'b'], boardInfo[row+'c']))
 
 
@@ -274,6 +274,7 @@ def updateBoard(move, piece):
 ###########################################################################
 # |=========================|| MAIN ||=========================|
 ###########################################################################
+
 # Runs the program.
 
 
@@ -314,18 +315,17 @@ def main():
 
         if turn != 'first':
             move = computerMove(gaming)
-            updateBoard(move, 'X')
+            updateBoard(move, comp_piece)
 
             time.sleep(1)
-
             drawGrid()
             gaming+=1
+            time.sleep(1)
 
         if gaming > 4:
-
-            if ftw('X'):
+            if ftw(comp_piece):
                 time.sleep(2.5)
-                print("\nThe X's have won the game!")
+                print("\nThe ",comp_piece,"'s have won the game!")
                 break
 
         if gaming == 10:
@@ -333,26 +333,30 @@ def main():
             print("\nIt's a TIE!")
             break
 
-
         move = getMove()
-        updateBoard(move, 'O')
+        updateBoard(move, human_piece)
 
         time.sleep(1)
-
         drawGrid()
         gaming += 1
-
         time.sleep(1)
 
         if gaming > 5:
-
-            if ftw('O'):
+            if ftw(human_piece):
                 time.sleep(2.5)
-                print("\nThe O's have won the game!")
+                print("\nThe ",human_piece,"'s have won the game!")
                 break
+
+        if gaming == 10:
+            time.sleep(1)
+            print("\nIt's a TIE!")
+            break
 
         turn = 'none'
 
 
 main()
 print("\nThanks a whole lot for playing!")
+
+#It is not saying it is the computers turn to move on turn 2
+#It is not saying it is a tie.
