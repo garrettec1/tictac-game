@@ -38,10 +38,19 @@ firstMoves =['1a','1c','3a','3c']
 # Who knows?
 
 def coinFlip():
+    #call it in the air? Funny statement if user waits too long.
 
-    print('Let\'s flip a coin to see who goes first')
+    time.sleep(.5)
+    print('\n\tLet\'s flip a coin to see who goes first')
     called = str(input("\n\tHeads or tails? h or t: ")).lower()
     coin = random.choice('h' 't')
+
+    time.sleep(1)
+    if coin == 'h':
+        print("\n\tThe coin landed on heads.")
+    else:
+        print("\n\tThe coin landed on tails.")
+    time.sleep(.5)
 
     if called == coin:
         print("\n\tYou are going first.")
@@ -49,6 +58,7 @@ def coinFlip():
     else:
         print("\n\tBad luck. \n\tThe computer goes first.")
         turn = 'second'
+    time.sleep(.5)
 
     return(turn)
 
@@ -282,14 +292,10 @@ def main():
 
     print('\n\tWelcome to tic-tac-toe!.')
 
-    time.sleep(1)
-
     turn = coinFlip()
-    #turn = 'firstp'
+
     print('\n\tHere is the game board.')
-    time.sleep(1)
     drawGrid()
-    time.sleep(1)
 
     if turn == 'first':
         human_piece = 'X'
@@ -297,8 +303,6 @@ def main():
     else:
         human_piece = 'O'
         comp_piece = 'X'
-
-    time.sleep(1)
 
     gaming = 1
     victory = False
@@ -323,7 +327,7 @@ def main():
 
         if gaming == 10:
             time.sleep(1)
-            print("\nIt's a TIE!")
+            print("\n\tIt's a TIE!")
             break
 
         move = getMove()
@@ -339,11 +343,17 @@ def main():
 
         if gaming == 10:
             time.sleep(1)
-            print("\nIt's a TIE!")
+            print("\n\tIt's a TIE!")
             break
 
         turn = 'none'
 
 
 main()
-print("\nThanks a whole lot for playing!")
+
+print("\n\tWould you like to play again? :)")
+again = str(input("\n\ty or n: ")).lower()
+if again == 'y':
+    main()
+
+print("\n\tThanks a whole lot for playing!")
