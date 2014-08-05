@@ -44,10 +44,10 @@ def coinFlip():
     coin = random.choice('h' 't')
 
     if called == coin:
-        print("You are going first.")
+        print("\n\tYou are going first.")
         turn = 'first'
     else:
-        print("Bad luck. You go second.")
+        print("\n\tBad luck. \n\tThe computer goes first.")
         turn = 'second'
 
     return(turn)
@@ -62,17 +62,16 @@ def coinFlip():
 
 def drawGrid():
 
-
+    time.sleep(1)
     count = 0
 
     while count < 3:
-
         count+=1
         drawRow(count)
 
         if count <=2:
             print("\t  ==|===|==")
-
+    time.sleep(1)
 
 
 ###########################################################################
@@ -285,15 +284,12 @@ def main():
 
     time.sleep(1)
 
+    turn = coinFlip()
+    #turn = 'firstp'
     print('\n\tHere is the game board.')
-
     time.sleep(1)
-
     drawGrid()
-
     time.sleep(1)
-    #turn = coinFlip()
-    turn = 'first'
 
     if turn == 'first':
         human_piece = 'X'
@@ -309,18 +305,15 @@ def main():
 
     while gaming<10:
 
-        if gaming > 2:
+        if gaming >= 2:
             time.sleep(1)
             print("\n\tIt is the computer turn.")
 
         if turn != 'first':
             move = computerMove(gaming)
             updateBoard(move, comp_piece)
-
-            time.sleep(1)
             drawGrid()
             gaming+=1
-            time.sleep(1)
 
         if gaming > 4:
             if ftw(comp_piece):
@@ -335,11 +328,8 @@ def main():
 
         move = getMove()
         updateBoard(move, human_piece)
-
-        time.sleep(1)
         drawGrid()
         gaming += 1
-        time.sleep(1)
 
         if gaming > 5:
             if ftw(human_piece):
@@ -357,6 +347,3 @@ def main():
 
 main()
 print("\nThanks a whole lot for playing!")
-
-#It is not saying it is the computers turn to move on turn 2
-#It is not saying it is a tie.
