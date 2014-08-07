@@ -14,7 +14,7 @@ random.seed()
 ###########################################################################
 
 #stores the state of the board for display
-boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',\
+boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
              '3a':' ', '3b':' ', '3c':' '}
 
 #used moves are removed from this list as they are made, so I don't have to
@@ -23,7 +23,7 @@ legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
 
 #This is a list of three tuples of all the win conditions. Used to check first
 # for winning moves, and second for blocking moves.
-win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),\
+win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 
 #The four corners are the best opening moves for the computer. This list
@@ -37,7 +37,7 @@ firstMoves =['1a','1c','3a','3c']
 ###########################################################################
 # Who knows?
 
-def coinFlip():
+def coin_flip():
     #call it in the air? Funny statement if user waits too long.
 
     time.sleep(.5)
@@ -45,7 +45,7 @@ def coinFlip():
     called = str(input("\n\tHeads or tails? h or t: ")).lower()
     coin = random.choice('h' 't')
 
-    time.sleep(1)
+    time.sleep(.5)
     if coin == 'h':
         print("\n\tThe coin landed on heads.")
     else:
@@ -70,18 +70,18 @@ def coinFlip():
 # Draws the game board
 
 
-def drawGrid():
+def draw_grid():
 
-    time.sleep(1)
+    time.sleep(.5)
     count = 0
 
     while count < 3:
         count+=1
-        drawRow(count)
+        draw_row(count)
 
         if count <=2:
             print("\t  ==|===|==")
-    time.sleep(1)
+    time.sleep(.5)
 
 
 ###########################################################################
@@ -92,7 +92,7 @@ def drawGrid():
 # calling boardInfo.
 
 
-def drawRow(row):
+def draw_row(row):
 
 
     if row == 1:
@@ -114,16 +114,16 @@ def drawRow(row):
 # Depopulates legalMoves and/or firstMoves.
 
 
-def getMove():
+def get_move():
 
 
     looping = True
 
-    time.sleep(1)
+    time.sleep(.5)
 
     print("\n\tIt is your turn to move.")
 
-    time.sleep(1)
+    time.sleep(.5)
 
     while looping:
 
@@ -132,7 +132,7 @@ def getMove():
         move = moving.lower()
 
         if move not in legalMoves:
-            time.sleep(1)
+            time.sleep(.5)
             print('\n\n\tThat is not a legal move.\n')
 
         else:
@@ -156,7 +156,7 @@ def getMove():
 # calcMove handles all other moves.
 
 
-def computerMove(turn):
+def computer_move(turn):
 
 
     if turn == 1:
@@ -168,7 +168,7 @@ def computerMove(turn):
         firstMoves.remove(move)
 
     else:
-        move = calcMove()
+        move = calc_move()
 
     legalMoves.remove(move)
 
@@ -186,13 +186,13 @@ def computerMove(turn):
 # If there are no winning moves or moves to be blocked. The computer takes the
 # remaining corner.
 
-def calcMove():
+def calc_move():
 
 
-    move = winBlock('X')
+    move = win_block('X')
 
     if move not in legalMoves:
-        move = winBlock('O')
+        move = win_block('O')
 
         if move not in legalMoves:
             move = random.choice(firstMoves)
@@ -211,7 +211,7 @@ def calcMove():
 # in the empty space.
 
 
-def winBlock(piece):
+def win_block(piece):
 
 
     move = 0
@@ -274,15 +274,28 @@ def ftw(piece):
 # Takes move, a string '1a' and piece from main.
 
 
-def updateBoard(move, piece):
+def update_board(move, piece):
 
     boardInfo[move] = piece
 
+def play_again():
+    print("\n\tWould you like to play again? :)")
+    again = str(input("\n\ty or n: ")).lower()
+
+    if again == 'y':
+        boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
+                     '3a':' ', '3b':' ', '3c':' '}
+        legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+        firstMoves =['1a','1c','3a','3c']
+        main()
 
 
 ###########################################################################
 # |=========================|| MAIN ||=========================|
 ###########################################################################
+
+
+
 
 # Runs the program.
 
@@ -292,10 +305,10 @@ def main():
 
     print('\n\tWelcome to tic-tac-toe!.')
 
-    turn = coinFlip()
+    turn = coin_flip()
 
     print('\n\tHere is the game board.')
-    drawGrid()
+    draw_grid()
 
     if turn == 'first':
         human_piece = 'X'
@@ -310,35 +323,35 @@ def main():
     while gaming<10:
 
         if gaming >= 2:
-            time.sleep(1)
+            time.sleep(.5)
             print("\n\tIt is the computer turn.")
 
         if turn != 'first':
-            move = computerMove(gaming)
-            updateBoard(move, comp_piece)
-            drawGrid()
+            move = computer_move(gaming)
+            update_board(move, comp_piece)
+            draw_grid()
             gaming+=1
 
         if gaming > 4:
             if ftw(comp_piece):
                 time.sleep(2.5)
-                print("\nThe ",comp_piece,"'s have won the game!")
+                print("\n\tThe ",comp_piece,"'s have won the game!")
                 break
 
         if gaming == 10:
-            time.sleep(1)
+            time.sleep(.5)
             print("\n\tIt's a TIE!")
             break
 
-        move = getMove()
-        updateBoard(move, human_piece)
-        drawGrid()
+        move = get_move()
+        update_board(move, human_piece)
+        draw_grid()
         gaming += 1
 
         if gaming > 5:
             if ftw(human_piece):
                 time.sleep(2.5)
-                print("\nThe ",human_piece,"'s have won the game!")
+                print("\n\tThe ",human_piece,"'s have won the game!")
                 break
 
         if gaming == 10:
@@ -351,9 +364,11 @@ def main():
 
 main()
 
-print("\n\tWould you like to play again? :)")
-again = str(input("\n\ty or n: ")).lower()
-if again == 'y':
-    main()
+play_again()
+
 
 print("\n\tThanks a whole lot for playing!")
+
+
+###intermitent bug where remove legal move fails
+###Very interesting bug in implimentation of play again. it runs only one time.
