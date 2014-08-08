@@ -1,0 +1,27 @@
+def play_again():
+    print("\n\tWould you like to play again? :)")
+    again = str(input("\n\ty or n: ")).lower()
+
+    if again == 'y':
+        boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
+                     '3a':' ', '3b':' ', '3c':' '}
+        legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+        firstMoves =['1a','1c','3a','3c']
+        main()
+So there are actually two problems here. One is that pass by reference will not
+ happen unless the function finishes. As it is main() is running inside this
+ function and main looks to global vars to run.
+
+I could set main to take these named arguements optionally. It would still find
+them in the global for the first play, and pass these when I call play again.
+
+I will try it, but I don't think it will work since the global vars will not be
+updated, and all of the other functions rely on the global vars for state...
+
+What I really need is to run the program from line one again, and I am not sure
+ how to do that. There must be some kind of structure or built-in for that?
+
+The other problem of it only running once is also problematic and would be solved
+ if I could run it from line one.
+
+Make the game a module? Call the module till n?
