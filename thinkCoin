@@ -1,0 +1,129 @@
+think coinFlip
+
+So I need to think about how to alter my code so that it runs properly going
+first or second. 
+
+The first problem is that main is structured so that the computer always goes 
+first.
+
+The second problem is that the computer move is programed so it goes first.
+
+
+I could deal with main pretty easily with a couple of if statements. 
+if turn == first:
+	ALL CODE ALLOWING HUMAN TO GO FIRST
+else:
+	ALL CODE FOR COMPUTER MOVING FIRST
+
+The issue I have with this solution is that it seems like there would be
+a great deal of repetition of code. I have the feeling that there should 
+be a way to structure main so it simply runs the same code...
+
+I could fiddle with the way gaming is iterated. So it would essentially 
+skip the first computer move.
+	This has a couple of issues.
+	Mainly revovling around how I detect win conditions. 
+	Gaming gets passed to computer move 
+
+This whole line of thought seems like a bad idea.
+
+I am finding this kind of tough because I designed the whole program with 
+the idea that the computer would go first. 
+
+I could put the whole of the computer move section in a conditional that is 
+only sensitive to the turn variable. So 
+if turn =! first:
+	computer move stuff
+
+then somewhere at the end of the first loop 
+turn = 'none'
+
+Because the only important change happens in the first move...
+
+It will be interesting to see how it will behave if I impliment that.
+
+Interesting problem with tie detection. If the computer goes first, and gaming
+iterates to 10, a tie has happend. After the computers final move that is.
+
+So I have an if statement in my code after the computer move and board update
+that simply checks if gaming == 10: and prints('It's a tie!'). 
+
+I was thinking that if I just tacked on an extra iteration for the computer it
+would fix the problem, but then the game runs a move short. 
+
+I could write some kind of evaluation of the dictionary, that checks to see if
+all of the boxes are full, but it seems like overkill.
+
+...
+
+Actually I think I will just reimpliment the same bit of code for tie checking 
+after the human move. That ought to do it. I may make this a function.
+
+def main():
+
+
+    print('\n\tWelcome to tic-tac-toe!.')
+
+    time.sleep(1)
+
+    print('\n\tHere is the game board.')
+
+    time.sleep(1)
+
+    drawGrid()
+
+    time.sleep(1)
+
+    print("\n\tThe computer moves first.")
+
+    time.sleep(1)
+
+    gaming = 1
+    victory = False
+
+    while gaming<10:
+
+        if gaming > 2:
+            time.sleep(1)
+            print("\n\tIt is the computer turn.")
+
+
+        move = computerMove(gaming)
+        updateBoard(move, 'X')
+
+        time.sleep(1)
+
+        drawGrid()
+        gaming+=1
+
+        if gaming > 4:
+
+            if ftw('X'):
+                time.sleep(2.5)
+                print("\nThe X's have won the game!")
+                break
+
+        if gaming == 10:
+            time.sleep(1)
+            print("\nIt's a TIE!")
+            break
+
+
+        move = getMove()
+        updateBoard(move, 'O')
+
+        time.sleep(1)
+
+        drawGrid()
+        gaming += 1
+
+        time.sleep(1)
+
+        if gaming > 5:
+
+            if ftw('O'):
+                time.sleep(2.5)
+                print("\nThe O's have won the game!")
+                break
+
+
