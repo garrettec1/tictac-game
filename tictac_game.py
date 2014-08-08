@@ -278,17 +278,24 @@ def update_board(move, piece):
 
     boardInfo[move] = piece
 
+def initialize_game():
+
+    for spots in boardInfo:
+        boardInfo[spots] = ' '
+
+
+    legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+    firstMoves =['1a','1c','3a','3c']
+    return (legalMoves,firstMoves)
+
 def play_again():
     print("\n\tWould you like to play again? :)")
     again = str(input("\n\ty or n: ")).lower()
 
     if again == 'y':
-        boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
-                     '3a':' ', '3b':' ', '3c':' '}
-        legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
-        firstMoves =['1a','1c','3a','3c']
-        main()
+        initialize_game()
 
+    return(again)
 
 ###########################################################################
 # |=========================|| MAIN ||=========================|
@@ -364,8 +371,13 @@ def main():
 
 main()
 
-play_again()
+again = 'none'
 
+while again != 'n':
+    legalMoves,firstMoves = initialize_game()
+    again = play_again()
+    if again == 'y':
+        main()
 
 print("\n\tThanks a whole lot for playing!")
 
