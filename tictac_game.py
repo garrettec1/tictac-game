@@ -13,31 +13,29 @@ random.seed()
 # GLOBAL VARIABLE ASSIGNMENT
 ###########################################################################
 
-#stores the state of the board for display
 boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
              '3a':' ', '3b':' ', '3c':' '}
+"""Stores the state of the board for display"""
 
-#used moves are removed from this list as they are made, so I don't have to
-# read the dictionary every time a move is calculated.
 legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+"""Used moves are removed from this list as they are made, so I don't have to
+ read the dictionary every time a move is calculated.
+"""
 
-#This is a list of three tuples of all the win conditions. Used to check first
-# for winning moves, and second for blocking moves.
 win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
+"""This is a list of three tuples of all the win conditions. Used to check first
+ for winning moves, and second for blocking moves.
+"""
 
-#The four corners are the best opening moves for the computer. This list
-# depopulates as the moves are used like leagalMoves.
 firstMoves =['1a','1c','3a','3c']
+"""The four corners are the best opening moves for the computer. This list
+ depopulates as the moves are used like leagalMoves.
+"""
 
-
-
-###########################################################################
-# : coinFlip :
-###########################################################################
-# Who knows?
 
 def coin_flip():
+    """uses random choice to choose between h or t and prints the result to screen"""
     #call it in the air? Funny statement if user waits too long.
 
     time.sleep(.5)
@@ -62,16 +60,9 @@ def coin_flip():
 
     return(turn)
 
-###########################################################################
-# : drawGrid :
-###########################################################################
-# Takes nothing
-# Calls drawRow, drawMid
-# Draws the game board
-
 
 def draw_grid():
-
+    """ Draws the game board. Calls draw_row() and passes count which acts as row number."""
     time.sleep(.5)
     count = 0
 
@@ -84,16 +75,11 @@ def draw_grid():
     time.sleep(.5)
 
 
-###########################################################################
-# : drawRow :
-###########################################################################
-# Takes an arguement called row from drawGrid (count)
-# Draws the rows and grid lables. Builds the strings to print with .format
-# calling boardInfo.
-
-
 def draw_row(row):
-
+    """ Takes an arguement called row from drawGrid (count)
+    Draws the rows and grid lables. Builds the strings to print with .format
+    calling boardInfo.
+    """
 
     if row == 1:
         print("\n\t  a   b   c")
@@ -104,90 +90,60 @@ def draw_row(row):
                                      boardInfo[row+'b'], boardInfo[row+'c']))
 
 
-
-###########################################################################
-# : getMove :
-###########################################################################
-# Takes nothing.
-# Returns the Human Move as a string: eg. '1a'
-# Gets input from player and checks if the move is legal.
-# Depopulates legalMoves and/or firstMoves.
-
-
 def get_move():
-
+    """Gets input from player and checks if the move is legal.
+    Depopulates legalMoves and/or firstMoves.
+    Returns the Human Move as a string: eg. '1a'
+    """
 
     looping = True
-
     time.sleep(.5)
-
     print("\n\tIt is your turn to move.")
-
     time.sleep(.5)
 
     while looping:
-
         moving = str(input("\n\tEnter your move. eg. 1a or 3c: "))
-
         move = moving.lower()
 
         if move not in legalMoves:
             time.sleep(.5)
             print('\n\n\tThat is not a legal move.\n')
-
         else:
             looping = False
 
+    legalMoves.remove(move)
     if move in firstMoves:
         firstMoves.remove(move)
-
-    legalMoves.remove(move)
-
 
     return(move)
 
 
-
-###########################################################################
-# :computerMove :
-###########################################################################
-# Takes turn as gaming variable from main.
-# The first if and elif handle the first two computer moves in the game.
-# calcMove handles all other moves.
-
-
 def computer_move(turn):
-
+    """ Takes the gaming variable from main as turn.
+    The first if and elif handle the first two computer moves in the game.
+    calc_move handles all other moves. Returns move as a string. eg: '1a'
+    """
 
     if turn == 1:
         move = random.choice(firstMoves)
         firstMoves.remove(move)
-
     elif turn == 3:
         move = random.choice(firstMoves)
         firstMoves.remove(move)
-
     else:
         move = calc_move()
 
     legalMoves.remove(move)
 
-
     return(move)
 
 
-
-###########################################################################
-# : calcMove :
-###########################################################################
-# Takes nothing.
-# Calls winBlock twice. First to find the winning move as the computer, if that
-# does not return a valid move, it finds a move to block a winning move.
-# If there are no winning moves or moves to be blocked. The computer takes the
-# remaining corner.
-
 def calc_move():
-
+    """ Calls winBlock twice. First to find the winning move as the computer, if that
+    does not return a valid move, it finds a move to block a winning move.
+    If there are no winning moves or moves to be blocked. The computer takes the
+    remaining corner.
+    """
 
     move = win_block('X')
 
@@ -197,32 +153,22 @@ def calc_move():
         if move not in legalMoves:
             move = random.choice(firstMoves)
 
-
     return(move)
 
 
-
-###########################################################################
-# : winBlock :
-###########################################################################
-# Takes piece passed from calcMove, a string 'X' or 'O'.
-# Uses a for loop to pull 3 tuples of win conditions from win[]
-# then a for loop to check the state of each location, and place a piece
-# in the empty space.
-
-
 def win_block(piece):
-
+    """ Takes piece passed from calcMove, a string 'X' or 'O'. move is assigned zero
+    so that if a valid move is not found, win_block returns an invalid move.
+    Uses a for loop to pull 3 tuples of win conditions from win[] then a for loop to
+    check the state of each location. It returns the location of the empty space.
+    """
 
     move = 0
 
     for three_in_a_row in win:
-
         empty = 0
         counter = 0
-
         for square in three_in_a_row:
-
             if boardInfo[square] == piece:
                 counter+=1
 
@@ -235,28 +181,20 @@ def win_block(piece):
             if move in legalMoves:
                 break
 
-
     return(move)
 
 
-
-###########################################################################
-# : ftw : (For The Win)
-###########################################################################
-# Takes piece from main. A string 'X' or 'O'
-# Prints to screen and Returns victory Bool as True if the game has been won.
-
-
 def ftw(piece):
+    """ (For The Win) Takes piece from main. A string 'X' or 'O'
+    Structured like win_block() with two for loops. Returns victory Bool as True if
+    the game has been won.
+    """
 
     victory = False
 
     for set in win:
-
         counter = 0
-
         for squares in set:
-
             if boardInfo[squares] == piece:
                 counter += 1
 
@@ -264,48 +202,40 @@ def ftw(piece):
                 victory = True
                 break
 
-
     return(victory)
 
 
-###########################################################################
-# : updateBoard :
-###########################################################################
-# Takes move, a string '1a' and piece from main.
-
-
 def update_board(move, piece):
+    """Takes move, a string '1a' and piece from main. I mostly made this a function
+    because update_board() is more readable
+    """
 
     boardInfo[move] = piece
 
-def initialize_game():
 
+def initialize_game():
+    """Initializes the state of the game."""
     for spots in boardInfo:
         boardInfo[spots] = ' '
-
-
     legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
     firstMoves =['1a','1c','3a','3c']
+
     return (legalMoves,firstMoves)
 
 def play_again():
+    """Asks the uses if they want to play again. This set of functions could use some
+    cleaning.
+    """
+
     print("\n\tWould you like to play again? :)")
     again = str(input("\n\ty or n: ")).lower()
 
-    if again == 'y':
-        initialize_game()
-
     return(again)
+
 
 ###########################################################################
 # |=========================|| MAIN ||=========================|
 ###########################################################################
-
-
-
-
-# Runs the program.
-
 
 def main():
 
@@ -380,7 +310,3 @@ while again != 'n':
         main()
 
 print("\n\tThanks a whole lot for playing!")
-
-
-###intermitent bug where remove legal move fails
-###Very interesting bug in implimentation of play again. it runs only one time.
