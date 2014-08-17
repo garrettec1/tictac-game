@@ -21,7 +21,56 @@ updated, and all of the other functions rely on the global vars for state...
 What I really need is to run the program from line one again, and I am not sure
  how to do that. There must be some kind of structure or built-in for that?
 
-The other problem of it only running once is also problematic and would be solved
+It only running once is also problematic and would be solved
  if I could run it from line one.
 
 Make the game a module? Call the module till n?
+
+How about I split the functionality. The intialization of the game state as it's
+own function, called by play_again. play_again called called inside a while loop
+after the first play through of main, that loop continues as long as 'n' is not
+entered. Seems reasonable. :)
+
+
+Totally did not work. I am pretty sure the issue of it only running once is
+fixed, but the board state is still not initializing. I am trying to do
+something wrongly on a deep level here. I am going to set initialize to return
+the game state stuff. I do not expect this to work. When I get home I will
+google some things.
+
+
+so this is what it looks like.
+
+def initialize_game():
+    boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
+                 '3a':' ', '3b':' ', '3c':' '}
+    legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+    firstMoves =['1a','1c','3a','3c']
+    return ()
+
+def play_again():
+    print("\n\tWould you like to play again? :)")
+    again = str(input("\n\ty or n: ")).lower()
+
+    if again == 'y':
+        initialize_game()
+
+    return(again)
+
+...
+again = 'none'
+
+while again != 'n':
+    for keys in boardInfo:
+        boardInfo[keys] = ' '
+    again = play_again()
+    if again == 'y':
+        main()
+
+there is currently some non-functional redundency, but the initialize function
+does absolutely nothing, where the for loop does.
+
+I must know WHY.
+
+okay so I just needed to catch the returns with the variable names. How did
+I get so stuck on something so simple.
