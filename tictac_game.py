@@ -241,11 +241,11 @@ def main():
 
 
     print('\n\tWelcome to tic-tac-toe!.')
-    #mock up of pygame thing.
-    interface = str(input('Would you like to play in pygame? y or n'))
+    #mock up of pygame thing. Broken and wrong.
+   """ interface = str(input('Would you like to play in pygame? y or n'))
     if interface == 'y':
         pytictac.main()
-        break
+        break"""
 
     turn = coin_flip()
 
@@ -258,17 +258,6 @@ def main():
     else:
         human_piece = 'O'
         comp_piece = 'X'
-
-
-
-
-
-
-
-
-
-
-
 
     gaming = 1
     victory = False
