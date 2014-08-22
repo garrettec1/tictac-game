@@ -9,9 +9,11 @@ red = (255,0,0)
 green = (0,225,0)
 
 size = [500,400]
-screen = pygame.display.set_mode(size,)
+screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 
-
+def calc_lines(size):
+    x = size
+    return ()
 
 def draw_board():
     pygame.draw.line(screen, blue, [100, 150], [400,150], 5)
@@ -37,14 +39,20 @@ pygame.display.flip()
 done = False
 while not done:
     clock.tick(10)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        if event.type == pygame.VIDEORESIZE:
+            size = (event.h, event.w)
 
+
+            #Event(16-VideoResize {'h': 501, 'w': 612, 'size': (612, 501)})>
     draw_board()
 
     pygame.display.flip()
 
+    test = []
 
 
     mouse = pygame.mouse.get_pos()
@@ -55,4 +63,5 @@ while not done:
 
     pygame.display.flip()
 pygame.quit()
+
 #sys.exit()
