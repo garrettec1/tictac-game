@@ -6,7 +6,6 @@
 import time
 import random
 random.seed()
-import pytictac
 
 
 ###########################################################################
@@ -223,8 +222,8 @@ def initialize_game():
     return (legalMoves,firstMoves)
 
 def play_again():
-    """Asks the uses if they want to play again. This set of functions could use some
-    cleaning.
+    """Asks the uses if they want to play again. This set of functions could use
+    some cleaning.
     """
 
     print("\n\tWould you like to play again? :)")
@@ -242,7 +241,7 @@ def main():
 
     print('\n\tWelcome to tic-tac-toe!.')
     #mock up of pygame thing. Broken and wrong.
-   """ interface = str(input('Would you like to play in pygame? y or n'))
+    """ interface = str(input('Would you like to play in pygame? y or n'))
     if interface == 'y':
         pytictac.main()
         break"""
@@ -303,15 +302,16 @@ def main():
 
         turn = 'none'
 
+if __name__ == "__main__":
+    """must use C-u C-c C-c to run in e-macs. Something complex going on here"""
+    main()
 
-main()
+    again = 'none'
 
-again = 'none'
+    while again != 'n':
+        legalMoves,firstMoves = initialize_game()
+        again = play_again()
+        if again == 'y':
+            main()
 
-while again != 'n':
-    legalMoves,firstMoves = initialize_game()
-    again = play_again()
-    if again == 'y':
-        main()
-
-print("\n\tThanks a whole lot for playing!")
+    print("\n\tThanks a whole lot for playing!")
