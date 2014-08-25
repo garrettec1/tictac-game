@@ -31,11 +31,35 @@ def calc_lines(size):
     lines = [down1,down2,right1,right2]
     return (lines)
 
+def find_board_location(lines,mouse_location):
+    """This function finds the location of the mouse click by comparing the
+    click position with the lines returned from calc_lines. So lines[0]
+    indicates down1, and lines[0][1][1] returns the second y variable where the
+    line is drawn. I found the y first because the format of the tictac_game
+    takes locations like '1a'.
+    """
+    if mouse_location[1] < lines[0][1][1]:
+        spot = '1'
+    elif mouse_location[1] < lines[1][1][1]:
+        spot = '2'
+    else:
+        spot = '3'
+    if mouse_location[0] < lines[2][0][0]:
+        spot = spot + 'a'
+    elif mouse_location[0] < lines[3][0][0]:
+        spot = spot + 'b'
+    else:
+        spot = spot + 'c'
+
+    return(spot)
+
 def draw_board(size):
 
     lines = calc_lines(size)
     for position in lines:
         pygame.draw.line(screen, blue, position[0], position[1], 20)
+
+    return(lines)
 
 pygame.display.set_caption("Tictac Game")
 
@@ -43,7 +67,7 @@ background = screen.fill(white)
 clock = pygame.time.Clock()
 
 background
-draw_board(size)
+lines = draw_board(size)
 
 pygame.display.flip()
 done = False
@@ -57,8 +81,10 @@ while not done:
             size = (event.w, event.h)
             screen = pygame.display.set_mode(size,pygame.RESIZABLE)
             screen.fill(white)
-            draw_board(size)
-
+            lines = draw_board(size)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_location = event.pos
+            spot = find_board_location(lines,mouse_location)
     pygame.display.flip()
 
     '''mouse = pygame.mouse.get_pos()
