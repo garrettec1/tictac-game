@@ -12,27 +12,38 @@ random.seed()
 # GLOBAL VARIABLE ASSIGNMENT
 ###########################################################################
 
+# Calling this boardInfo seems sort of odd.  Isn't this just the board itself?
 boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
              '3a':' ', '3b':' ', '3c':' '}
 """Stores the state of the board for display"""
 
+# I think a more appropriate name for this variable might be availableMoves
 legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
 """Used moves are removed from this list as they are made, so I don't have to
  read the dictionary every time a move is calculated.
 """
 
+# Again, this could have a better name.  This is really the set of all
+# things board locations that can have a win occur on them.
 win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 """This is a list of three tuples of all the win conditions. Used to check first
  for winning moves, and second for blocking moves.
 """
 
+# Good name :D
 firstMoves =['1a','1c','3a','3c']
 """The four corners are the best opening moves for the computer. This list
  depopulates as the moves are used like leagalMoves.
 """
 
 
+# Nice function.  Does a concrete limited thing, and abstracts the
+# process of getting input from the user.  The name is not quite what
+# it does though.  I always think the name should give some indication
+# of what the return will be, so with the name coin_flip I would
+# expect this to return heads or tails.  But this actually decides who
+# goes first as well, and the coin_flip is only part of what it does.
 def coin_flip():
     """uses random choice to choose between h or t and prints the result to screen"""
     #call it in the air? Funny statement if user waits too long.
@@ -59,7 +70,8 @@ def coin_flip():
 
     return(turn)
 
-
+# Good size for both drawing functions, hiding the complexity of
+# draw_row makes draw_grid MUCH more readable
 def draw_grid():
     """ Draws the game board. Calls draw_row() and passes count which acts as row number."""
     time.sleep(.5)
@@ -73,7 +85,9 @@ def draw_grid():
             print("\t  ==|===|==")
     time.sleep(.5)
 
-
+# The name "row" is misleading. To me it reads as though that is the
+# row content. But what you actually mean is the row_number or
+# row_index.
 def draw_row(row):
     """ Takes an arguement called row from drawGrid (count)
     Draws the rows and grid lables. Builds the strings to print with .format
@@ -88,7 +102,15 @@ def draw_row(row):
     print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],
                                      boardInfo[row+'b'], boardInfo[row+'c']))
 
-
+# I think that isolating the input code is good. But it seems a bit
+# strange to also have this modify the legalMoves list, and check
+# whether it's a valid move.  I would probably put this into a
+# separate function that actually makes a move. Then the updating the
+# board and the updating of the legal move step are tied together.
+# This is appropriate since they are actualy just different views of
+# the same data. Having them updated at different points in the code
+# and by different functions means that it would be much easier for
+# them to get out of sync. Same for firstMoves
 def get_move():
     """Gets input from player and checks if the move is legal.
     Depopulates legalMoves and/or firstMoves.
@@ -214,6 +236,10 @@ def update_board(move, piece):
 
 def initialize_game():
     """Initializes the state of the game."""
+
+    # Typically the looping variable (i.e. spots in this case) is a
+    # word in singular form. Because it's actually not multiple spots,
+    # it's just one.
     for spots in boardInfo:
         boardInfo[spots] = ' '
     legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
@@ -246,6 +272,13 @@ def main():
         pytictac.main()
         break"""
 
+    # Using the string 'first' as the return value here is sort of an
+    # awkward interface. It's inherently ambiguous as to what it
+    # means.  Who goes first? Computer or human? The point is you have
+    # to KNOW what coin_flip means which probably means looking at the
+    # code.  How could you do it less ambiguously? Ideally the only
+    # thing you have to know about a function is *what* it returns,
+    # not how it derived that information.
     turn = coin_flip()
 
     print('\n\tHere is the game board.')
@@ -258,15 +291,22 @@ def main():
         human_piece = 'O'
         comp_piece = 'X'
 
+    # Why call it gaming? Doesn't mean much to me. Seems like it's
+    # actually the turn counter?
     gaming = 1
     victory = False
 
     while gaming<10:
 
+        # Why?!? Why does this only happen after the 2nd turn?
         if gaming >= 2:
             time.sleep(.5)
             print("\n\tIt is the computer turn.")
 
+        # This was confusing to read.  The words mislead you into
+        # thinking this means "when it's not the first turn".  But
+        # that's not what it means at all. It actually means, "if the
+        # computer is going first."  So it should probably say that ;)
         if turn != 'first':
             move = computer_move(gaming)
             update_board(move, comp_piece)
