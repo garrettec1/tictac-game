@@ -296,6 +296,12 @@ def main():
     gaming = 1
     victory = False
 
+    # The mess of conditionals inside here is kind of intense. It
+    # looks like it just evolved into the current state through trial
+    # and error (not shocking ;).  But it's level of clarity has
+    # become low.  The usage of the gaming variable seems REALLY all
+    # over the place.  It's confusing that it gets incremented
+    # multiple times throughout this while loop
     while gaming<10:
 
         # Why?!? Why does this only happen after the 2nd turn?
