@@ -32,36 +32,7 @@ def calc_lines(size):
     return (lines)
 
 def find_board_location(lines,mouse_location,size):
-    """This function finds the location of the mouse click by comparing the
-    click position with the lines returned from calc_lines. So lines[0]
-    indicates down1, and lines[0][1][1] returns the second y variable where the
-    line is drawn. I found the y first because the format of the tictac_game
-    takes locations like '1a'.
-    Bounds will be used to size the X and O. List because tuples are immuntable.
-    """
-    bounds = ['x','y']
 
-    if mouse_location[1] < lines[0][1][1]:
-        spot = '1'
-        bounds[1] = lines[0][1][1]
-    elif mouse_location[1] < lines[1][1][1]:
-        spot = '2'
-        bounds[1] = lines[1][1][1]
-    else:
-        spot = '3'
-        bounds[1] = size[1]
-    if mouse_location[0] < lines[2][0][0]:
-        spot = spot + 'a'
-        bounds[0] = lines[2][0][0]
-    elif mouse_location[0] < lines[3][0][0]:
-        spot = spot + 'b'
-        bounds[0] = lines[3][0][0]
-    else:
-        spot = spot + 'c'
-        bounds[0] = size[0]
-    print(bounds)
-
-    return(spot)
 
 def draw_board(size):
 
