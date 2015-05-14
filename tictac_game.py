@@ -12,26 +12,24 @@ random.seed()
 # GLOBAL VARIABLE ASSIGNMENT
 ###########################################################################
 
-# Calling this boardInfo seems sort of odd.  Isn't this just the board itself?
-boardInfo = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
+
+board = {'1a':' ', '1b':' ', '1c':' ', '2a':' ', '2b':' ', '2c':' ',
              '3a':' ', '3b':' ', '3c':' '}
 """Stores the state of the board for display"""
 
-# I think a more appropriate name for this variable might be availableMoves
-legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+availableMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
 """Used moves are removed from this list as they are made, so I don't have to
  read the dictionary every time a move is calculated.
 """
 
-# Again, this could have a better name.  This is really the set of all
-# things board locations that can have a win occur on them.
-win = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),
+
+winConditions = [('1a','1b','1c'),('2a','2b','2c'), ('3a','3b','3c'), ('1a','2a','3a'),
        ('1b','2b','3b'), ('1c','2c','3c'),('1a','2b','3c'), ('3a','2b','1c')]
 """This is a list of three tuples of all the win conditions. Used to check first
  for winning moves, and second for blocking moves.
 """
 
-# Good name :D
+
 firstMoves =['1a','1c','3a','3c']
 """The four corners are the best opening moves for the computer. This list
  depopulates as the moves are used like leagalMoves.
@@ -91,7 +89,7 @@ def draw_grid():
 def draw_row(row):
     """ Takes an arguement called row from drawGrid (count)
     Draws the rows and grid lables. Builds the strings to print with .format
-    calling boardInfo.
+    calling board.
     """
 
     if row == 1:
@@ -99,11 +97,11 @@ def draw_row(row):
 
     row = str(row)
 
-    print("\t{} {} | {} | {}".format(row, boardInfo[row+'a'],
-                                     boardInfo[row+'b'], boardInfo[row+'c']))
+    print("\t{} {} | {} | {}".format(row, board[row+'a'],
+                                     board[row+'b'], board[row+'c']))
 
 # I think that isolating the input code is good. But it seems a bit
-# strange to also have this modify the legalMoves list, and check
+# strange to also have this modify the availableMoves list, and check
 # whether it's a valid move.  I would probably put this into a
 # separate function that actually makes a move. Then the updating the
 # board and the updating of the legal move step are tied together.
@@ -113,7 +111,7 @@ def draw_row(row):
 # them to get out of sync. Same for firstMoves
 def get_move():
     """Gets input from player and checks if the move is legal.
-    Depopulates legalMoves and/or firstMoves.
+    Depopulates availableMoves and/or firstMoves.
     Returns the Human Move as a string: eg. '1a'
     """
 
@@ -126,13 +124,13 @@ def get_move():
         moving = str(input("\n\tEnter your move. eg. 1a or 3c: "))
         move = moving.lower()
 
-        if move not in legalMoves:
+        if move not in availableMoves:
             time.sleep(.5)
             print('\n\n\tThat is not a legal move.\n')
         else:
             looping = False
 
-    legalMoves.remove(move)
+    availableMoves.remove(move)
     if move in firstMoves:
         firstMoves.remove(move)
 
@@ -154,7 +152,7 @@ def computer_move(turn):
     else:
         move = calc_move()
 
-    legalMoves.remove(move)
+    availableMoves.remove(move)
 
     return(move)
 
@@ -168,10 +166,10 @@ def calc_move():
 
     move = win_block('X')
 
-    if move not in legalMoves:
+    if move not in availableMoves:
         move = win_block('O')
 
-        if move not in legalMoves:
+        if move not in availableMoves:
             move = random.choice(firstMoves)
 
     return(move)
@@ -180,26 +178,26 @@ def calc_move():
 def win_block(piece):
     """ Takes piece passed from calcMove, a string 'X' or 'O'. move is assigned zero
     so that if a valid move is not found, win_block returns an invalid move.
-    Uses a for loop to pull 3 tuples of win conditions from win[] then a for loop to
+    Uses a for loop to pull 3 tuples of win conditions from winConditions[] then a for loop to
     check the state of each location. It returns the location of the empty space.
     """
 
     move = 0
 
-    for three_in_a_row in win:
+    for three_in_a_row in winConditions:
         empty = 0
         counter = 0
         for square in three_in_a_row:
-            if boardInfo[square] == piece:
+            if board[square] == piece:
                 counter+=1
 
-            if boardInfo[square] == ' ':
+            if board[square] == ' ':
                 empty = square
 
             if counter == 2 and empty != ' ':
                 move = empty
 
-            if move in legalMoves:
+            if move in availableMoves:
                 break
 
     return(move)
@@ -213,10 +211,10 @@ def ftw(piece):
 
     victory = False
 
-    for set in win:
+    for set in winConditions:
         counter = 0
         for squares in set:
-            if boardInfo[squares] == piece:
+            if board[squares] == piece:
                 counter += 1
 
             if counter == 3:
@@ -231,7 +229,7 @@ def update_board(move, piece):
     because update_board() is more readable
     """
 
-    boardInfo[move] = piece
+    board[move] = piece
 
 
 def initialize_game():
@@ -240,12 +238,12 @@ def initialize_game():
     # Typically the looping variable (i.e. spots in this case) is a
     # word in singular form. Because it's actually not multiple spots,
     # it's just one.
-    for spots in boardInfo:
-        boardInfo[spots] = ' '
-    legalMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
+    for spots in board:
+        board[spots] = ' '
+    availableMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
     firstMoves =['1a','1c','3a','3c']
 
-    return (legalMoves,firstMoves)
+    return (availableMoves,firstMoves)
 
 def play_again():
     """Asks the uses if they want to play again. This set of functions could use
@@ -355,7 +353,7 @@ if __name__ == "__main__":
     again = 'none'
 
     while again != 'n':
-        legalMoves,firstMoves = initialize_game()
+        availableMoves,firstMoves = initialize_game()
         again = play_again()
         if again == 'y':
             main()
