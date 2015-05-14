@@ -42,7 +42,7 @@ firstMoves =['1a','1c','3a','3c']
 # of what the return will be, so with the name coin_flip I would
 # expect this to return heads or tails.  But this actually decides who
 # goes first as well, and the coin_flip is only part of what it does.
-def coin_flip():
+def flip_for_turn():
     """uses random choice to choose between h or t and prints the result to screen"""
     #call it in the air? Funny statement if user waits too long.
 
@@ -83,22 +83,21 @@ def draw_grid():
             print("\t  ==|===|==")
     time.sleep(.5)
 
-# The name "row" is misleading. To me it reads as though that is the
-# row content. But what you actually mean is the row_number or
-# row_index.
-def draw_row(row):
+
+def draw_row(row_index):
     """ Takes an arguement called row from drawGrid (count)
     Draws the rows and grid lables. Builds the strings to print with .format
     calling board.
     """
 
-    if row == 1:
+    if row_index == 1:
         print("\n\t  a   b   c")
 
-    row = str(row)
+    #cast index number to a string for evaluation as a location
+    row_number = str(row_index)
 
-    print("\t{} {} | {} | {}".format(row, board[row+'a'],
-                                     board[row+'b'], board[row+'c']))
+    print("\t{} {} | {} | {}".format(row_number, board[row_number +'a'],
+                                     board[row_number +'b'], board[row_number +'c']))
 
 # I think that isolating the input code is good. But it seems a bit
 # strange to also have this modify the availableMoves list, and check
@@ -273,11 +272,11 @@ def main():
     # Using the string 'first' as the return value here is sort of an
     # awkward interface. It's inherently ambiguous as to what it
     # means.  Who goes first? Computer or human? The point is you have
-    # to KNOW what coin_flip means which probably means looking at the
+    # to KNOW what flip_for_turn means which probably means looking at the
     # code.  How could you do it less ambiguously? Ideally the only
     # thing you have to know about a function is *what* it returns,
     # not how it derived that information.
-    turn = coin_flip()
+    turn = flip_for_turn()
 
     print('\n\tHere is the game board.')
     draw_grid()
