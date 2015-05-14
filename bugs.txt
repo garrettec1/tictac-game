@@ -1,0 +1,65 @@
+Garrett Fuller
+Bug found &date
+        y or n: y
+
+	Welcome to tic-tac-toe!.
+
+	Let's flip a coin to see who goes first
+
+	Heads or tails? h or t: t
+
+	The coin landed on tails.
+
+	You are going first.
+
+	Here is the game board.
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2   |   |
+	  ==|===|==
+	3   |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 2b
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2   | X |
+	  ==|===|==
+	3   |   |
+
+	It is the computer turn.
+
+	  a   b   c
+	1 O |   |
+	  ==|===|==
+	2   | X |
+	  ==|===|==
+	3   |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 3c
+
+	  a   b   c
+	1 O |   |
+	  ==|===|==
+	2   | X |
+	  ==|===|==
+	3   |   | X
+
+	It is the computer turn.
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/mint/documents/prog/tictactoe/tictac_game.py", line 359, in <module>
+    main()
+  File "/home/mint/documents/prog/tictactoe/tictac_game.py", line 315, in main
+    move = computer_move(gaming)
+  File "/home/mint/documents/prog/tictactoe/tictac_game.py", line 155, in computer_move
+    availableMoves.remove(move)
+ValueError: list.remove(x): x not in list
+>>>
