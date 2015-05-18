@@ -54,10 +54,10 @@ def flip_for_turn():
 
     if called == coin:
         print("\n\tYou are going first.")
-        turn = 'first'
+        turn = 'human'
     else:
         print("\n\tBad luck. \n\tThe computer goes first.")
-        turn = 'second'
+        turn = 'computer'
     time.sleep(.5)
 
     return(turn)
@@ -142,22 +142,17 @@ def remove_move(move):
 
 
 def computer_move(turn):
-    """ Takes the gaming variable from main as turn.
+    """ Takes the turn_count variable from main as turn.
     The first if and elif handle the first two computer moves in the game.
     calc_move handles all other moves. Returns move as a string. eg: '1a'
     """
 
     if turn == 1:
         move = random.choice(firstMoves)
-        #firstMoves.remove(move)
     elif turn == 3:
         move = random.choice(firstMoves)
-        #firstMoves.remove(move)
     else:
         move = calc_move()
-
-    #availableMoves.remove(move)
-    #All changes to availableMoves will be handled by update_board
 
     return(move)
 
@@ -282,12 +277,12 @@ def main():
     # code.  How could you do it less ambiguously? Ideally the only
     # thing you have to know about a function is *what* it returns,
     # not how it derived that information.
-    turn = flip_for_turn()
+    first_turn = flip_for_turn()
 
     print('\n\tHere is the game board.')
     draw_grid()
 
-    if turn == 'first':
+    if first_turn == 'human':
         human_piece = 'X'
         comp_piece = 'O'
     else:
@@ -296,19 +291,19 @@ def main():
 
     # Why call it gaming? Doesn't mean much to me. Seems like it's
     # actually the turn counter?
-    gaming = 1
+    turn_count = 1
     victory = False
 
     # The mess of conditionals inside here is kind of intense. It
     # looks like it just evolved into the current state through trial
-    # and error (not shocking ;).  But it's level of clarity has
+    # any error (not shocking ;).  But it's level of clarity has
     # become low.  The usage of the gaming variable seems REALLY all
     # over the place.  It's confusing that it gets incremented
     # multiple times throughout this while loop
-    while gaming<10:
+    while turn_count<10:
 
         # Why?!? Why does this only happen after the 2nd turn?
-        if gaming >= 2:
+        if turn_count >= 2:
             time.sleep(.5)
             print("\n\tIt is the computer turn.")
 
@@ -317,18 +312,18 @@ def main():
         # that's not what it means at all. It actually means, "if the
         # computer is going first."  So it should probably say that ;)
         if turn != 'first':
-            move = computer_move(gaming)
+            move = computer_move(turn_count)
             update_board(move, comp_piece)
             draw_grid()
-            gaming+=1
+            turn_count+=1
 
-        if gaming > 4:
+        if turn_count > 4:
             if ftw(comp_piece):
                 time.sleep(2.5)
                 print("\n\tThe ",comp_piece,"'s have won the game!")
                 break
 
-        if gaming == 10:
+        if turn_count == 10:
             time.sleep(.5)
             print("\n\tIt's a TIE!")
             break
@@ -336,15 +331,15 @@ def main():
         move = get_human_move()
         update_board(move, human_piece)
         draw_grid()
-        gaming += 1
+        turn_count += 1
 
-        if gaming > 5:
+        if turn_count > 5:
             if ftw(human_piece):
                 time.sleep(2.5)
                 print("\n\tThe ",human_piece,"'s have won the game!")
                 break
 
-        if gaming == 10:
+        if turn_count == 10:
             time.sleep(1)
             print("\n\tIt's a TIE!")
             break
