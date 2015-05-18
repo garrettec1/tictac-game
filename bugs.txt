@@ -1,5 +1,5 @@
 Garrett Fuller
-Bug found &date
+Bug found
         y or n: y
 
 	Welcome to tic-tac-toe!.
@@ -62,4 +62,108 @@ Traceback (most recent call last):
   File "/home/mint/documents/prog/tictactoe/tictac_game.py", line 155, in computer_move
     availableMoves.remove(move)
 ValueError: list.remove(x): x not in list
+>>>
+
+
+NEW BUG. Second player can play to a win!
+	Here is the game board.
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2   |   |
+	  ==|===|==
+	3   |   |
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2   |   |
+	  ==|===|==
+	3 X |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 2a
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2 O |   |
+	  ==|===|==
+	3 X |   |
+
+	It is the computer turn.
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2 O |   |
+	  ==|===|==
+	3 X |   | X
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 3b
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2 O |   |
+	  ==|===|==
+	3 X | O | X
+
+	It is the computer turn.
+
+	  a   b   c
+	1 X |   |
+	  ==|===|==
+	2 O |   |
+	  ==|===|==
+	3 X | O | X
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 2b
+
+	  a   b   c
+	1 X |   |
+	  ==|===|==
+	2 O | O |
+	  ==|===|==
+	3 X | O | X
+
+	It is the computer turn.
+
+	  a   b   c
+	1 X |   |
+	  ==|===|==
+	2 O | O | X
+	  ==|===|==
+	3 X | O | X
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 1a
+
+
+	That is not a legal move.
+
+
+	Enter your move. eg. 1a or 3c: 1b
+
+	  a   b   c
+	1 X | O |
+	  ==|===|==
+	2 O | O | X
+	  ==|===|==
+	3 X | O | X
+
+	The  O 's have won the game!
+
+	Would you like to play again? :)
+
+	y or n: n
+
+	Thanks a whole lot for playing!
 >>>
