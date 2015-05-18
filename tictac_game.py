@@ -36,12 +36,6 @@ firstMoves =['1a','1c','3a','3c']
 """
 
 
-# Nice function.  Does a concrete limited thing, and abstracts the
-# process of getting input from the user.  The name is not quite what
-# it does though.  I always think the name should give some indication
-# of what the return will be, so with the name coin_flip I would
-# expect this to return heads or tails.  But this actually decides who
-# goes first as well, and the coin_flip is only part of what it does.
 def flip_for_turn():
     """uses random choice to choose between h or t and prints the result to screen"""
     #call it in the air? Funny statement if user waits too long.
@@ -68,8 +62,7 @@ def flip_for_turn():
 
     return(turn)
 
-# Good size for both drawing functions, hiding the complexity of
-# draw_row makes draw_grid MUCH more readable
+
 def draw_grid():
     """ Draws the game board. Calls draw_row() and passes count which acts as row number."""
     time.sleep(.5)
