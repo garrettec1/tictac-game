@@ -146,7 +146,10 @@ def computer_move(turn):
     The first if and elif handle the first two computer moves in the game.
     calc_move handles all other moves. Returns move as a string. eg: '1a'
     """
+    time.sleep(.5)
+    print("\n\tIt is the computer turn.")
 
+    #only takes from first move when is goes first? have to revisit this.
     if turn == 1:
         move = random.choice(firstMoves)
     elif turn == 3:
@@ -289,8 +292,6 @@ def main():
         human_piece = 'O'
         comp_piece = 'X'
 
-    # Why call it gaming? Doesn't mean much to me. Seems like it's
-    # actually the turn counter?
     turn_count = 1
     victory = False
 
@@ -302,16 +303,11 @@ def main():
     # multiple times throughout this while loop
     while turn_count<10:
 
-        # Why?!? Why does this only happen after the 2nd turn?
-        if turn_count >= 2:
-            time.sleep(.5)
-            print("\n\tIt is the computer turn.")
-
         # This was confusing to read.  The words mislead you into
         # thinking this means "when it's not the first turn".  But
         # that's not what it means at all. It actually means, "if the
         # computer is going first."  So it should probably say that ;)
-        if turn != 'first':
+        if first_turn == 'computer':
             move = computer_move(turn_count)
             update_board(move, comp_piece)
             draw_grid()
