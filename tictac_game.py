@@ -106,26 +106,34 @@ def get_human_move():
     Returns the Human Move as a string: eg. '1a'
     """
 
-    looping = True
+    legal_move = False
     time.sleep(.5)
     print("\n\tIt is your turn to move.")
     time.sleep(.5)
 
-    while looping:
+    while (not legal_move):
         moving = str(input("\n\tEnter your move. eg. 1a or 3c: "))
         move = moving.lower()
-
-        if move not in availableMoves:
-            time.sleep(.5)
-            print('\n\n\tThat is not a legal move.\n')
-        else:
-            looping = False
-
-    availableMoves.remove(move)
-    if move in firstMoves:
-        firstMoves.remove(move)
+        legal_move = check_move(move)
 
     return(move)
+
+
+def check_move(move):
+    """checks to see if a move is legal. Takes move string as parameter.
+    Returns Boolean"""
+    if move not in availableMoves:
+        time.sleep(.5)
+        print('\n\n\tThat is not a legal move.\n')
+        return(False)
+    else:
+        return(True)
+
+    availableMoves.remove(move)
+
+    if move in firstMoves:
+        if move in firstMoves:
+            firstMoves.remove(move)
 
 
 def computer_move(turn):
