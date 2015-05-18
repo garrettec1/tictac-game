@@ -149,14 +149,15 @@ def computer_move(turn):
 
     if turn == 1:
         move = random.choice(firstMoves)
-        firstMoves.remove(move)
+        #firstMoves.remove(move)
     elif turn == 3:
         move = random.choice(firstMoves)
-        firstMoves.remove(move)
+        #firstMoves.remove(move)
     else:
         move = calc_move()
 
-    availableMoves.remove(move)
+    #availableMoves.remove(move)
+    #All changes to availableMoves will be handled by update_board
 
     return(move)
 
