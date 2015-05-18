@@ -101,9 +101,8 @@ def draw_row(row_index):
 # the same data. Having them updated at different points in the code
 # and by different functions means that it would be much easier for
 # them to get out of sync. Same for firstMoves
-def get_move():
-    """Gets input from player and checks if the move is legal.
-    Depopulates availableMoves and/or firstMoves.
+def get_human_move():
+    """Gets input from player, loops over check_move till that returns true.
     Returns the Human Move as a string: eg. '1a'
     """
 
@@ -320,7 +319,7 @@ def main():
             print("\n\tIt's a TIE!")
             break
 
-        move = get_move()
+        move = get_human_move()
         update_board(move, human_piece)
         draw_grid()
         gaming += 1
