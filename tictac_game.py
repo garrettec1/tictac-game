@@ -129,6 +129,11 @@ def check_move(move):
     else:
         return(True)
 
+
+def remove_move(move):
+    """do_move will always be called after the legality of a move has been
+    checked. It takes move as a parameter then removes the move from available
+    moves and from first move"""
     availableMoves.remove(move)
 
     if move in firstMoves:
@@ -227,7 +232,7 @@ def update_board(move, piece):
     """Takes move, a string '1a' and piece from main. I mostly made this a function
     because update_board() is more readable
     """
-
+    remove_move(move)
     board[move] = piece
 
 
