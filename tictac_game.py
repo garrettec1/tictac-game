@@ -228,8 +228,8 @@ def detect_winning_move(piece):
 
 
 def update_board(move, piece):
-    """Takes move, a string '1a' and piece from main. I mostly made this a function
-    because update_board() is more readable
+    """Takes move, a string '1a' and piece 'X' or 'O' from main. Updates the
+    game board and calls remove_move to depopulate used moves.
     """
     remove_move(move)
     board[move] = piece
