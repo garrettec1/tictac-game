@@ -238,11 +238,8 @@ def update_board(move, piece):
 def initialize_game():
     """Initializes the state of the game."""
 
-    # Typically the looping variable (i.e. spots in this case) is a
-    # word in singular form. Because it's actually not multiple spots,
-    # it's just one.
-    for spots in board:
-        board[spots] = ' '
+    for spot in board:
+        board[spot] = ' '
     availableMoves = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c']
     firstMoves =['1a','1c','3a','3c']
 
