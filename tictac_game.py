@@ -131,7 +131,7 @@ def check_move(move):
 
 
 def remove_move(move):
-    """do_move will always be called after the legality of a move has been
+    """remove_move will always be called after the legality of a move has been
     checked. It takes move as a parameter then removes the move from available
     moves and from first move"""
     availableMoves.remove(move)
@@ -149,7 +149,7 @@ def computer_move(turn):
     time.sleep(.5)
     print("\n\tIt is the computer turn.")
 
-    #only takes from first move when is goes first? have to revisit this.
+    #only takes from first move when is goes first or third? have to revisit this.
     if turn == 1:
         move = random.choice(firstMoves)
     elif turn == 3:
