@@ -206,8 +206,8 @@ def win_block(piece):
     return(move)
 
 
-def ftw(piece):
-    """ (For The Win) Takes piece from main. A string 'X' or 'O'
+def detect_winning_move(piece):
+    """Takes piece from main. A string 'X' or 'O'
     Structured like win_block() with two for loops. Returns victory Bool as True if
     the game has been won.
     """
@@ -314,7 +314,7 @@ def main():
             turn_count+=1
 
         if turn_count > 4:
-            if ftw(comp_piece):
+            if detect_winning_move(comp_piece):
                 time.sleep(2.5)
                 print("\n\tThe ",comp_piece,"'s have won the game!")
                 break
@@ -330,7 +330,7 @@ def main():
         turn_count += 1
 
         if turn_count > 5:
-            if ftw(human_piece):
+            if detect_winning_move(human_piece):
                 time.sleep(2.5)
                 print("\n\tThe ",human_piece,"'s have won the game!")
                 break
