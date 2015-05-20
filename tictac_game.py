@@ -255,6 +255,17 @@ def play_again():
 
     return(again)
 
+def do_a_human_move(human_piece):
+    move = get_human_move()
+    update_board(move, human_piece)
+    draw_grid()
+
+def do_a_computer_move(turn_count, comp_piece):
+    move = computer_move(turn_count)
+    update_board(move, comp_piece)
+    draw_grid()
+
+
 ###########################################################################
 # |=========================|| MAIN ||=========================|
 ###########################################################################
