@@ -45,4 +45,5 @@
    3) make a individual function for each "goes first"
    4) find a better solution. I want the game to be impervious to who is going
       first. I want to find a way to make that happen.
+
 *** turns 1-4
