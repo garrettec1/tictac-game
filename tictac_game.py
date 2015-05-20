@@ -323,6 +323,33 @@ def main():
                 time.sleep(1)
                 print("\n\tIt's a TIE!")
 
+    while first_turn == "human":
+        do_a_human_move(human_piece)
+        turn_count += 1
+
+        if detect_winning_move(human_piece):
+            first_turn = "stop"
+            time.sleep(2.5)
+            print("\n\tThe ",human_piece,"'s have won the game!")
+
+        if turn_count == 10:
+            first_turn = "stop"
+            time.sleep(1)
+            print("\n\tIt's a TIE!")
+
+        if first_turn != ("stop"):
+            do_a_computer_move(turn_count, comp_piece)
+            turn_count+=1
+
+            if detect_winning_move(comp_piece):
+                first_turn = "stop"
+                time.sleep(2.5)
+                print("\n\tThe ",comp_piece,"'s have won the game!")
+
+            if turn_count == 10:
+                first_turn = "stop"
+                time.sleep(.5)
+                print("\n\tIt's a TIE!")
 
     turn = 'none'
 
