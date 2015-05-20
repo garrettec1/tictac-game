@@ -1,5 +1,17 @@
-Garrett Fuller
-Bug found
+* Bug notes
+  - New bugs are added to the bottom.
+  - Bug reports (will eventually) be prefaced like this
+    1. * Descriptive name
+    2.   - description of behavior
+    3.   - date found
+    4.   - name of reporter
+    5.   - paste example of behavior
+
+* mysterious remove error
+  - Actually, I have no idea why this happened yet.
+  - found some time ago TODO check github for date
+  - Garrett Fuller
+** pasted
         y or n: y
 
 	Welcome to tic-tac-toe!.
@@ -64,8 +76,11 @@ Traceback (most recent call last):
 ValueError: list.remove(x): x not in list
 >>>
 
-
-NEW BUG. Second player can play to a win!
+* Second player can play to win!?
+  - same as name
+  - TODO check github for date added
+  - Garrett Fuller
+** Pasted example
 	Here is the game board.
 
 	  a   b   c
@@ -167,3 +182,131 @@ NEW BUG. Second player can play to a win!
 
 	Thanks a whole lot for playing!
 >>>
+
+
+* Computer blocks and fails to take winning move.
+  - The name AND it's a tie prints inappropriately
+  - May 20 2015
+  - Garrett Fuller
+** Paste example
+   	Welcome to tic-tac-toe!.
+
+	Let's flip a coin to see who goes first
+
+	Heads or tails? h or t: h
+
+	The coin landed on heads.
+
+	You are going first.
+
+	Here is the game board.
+
+	  a   b   c
+	1   |   |
+	  ==|===|==
+	2   |   |
+	  ==|===|==
+	3   |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 11
+
+
+	That is not a legal move.
+
+
+	Enter your move. eg. 1a or 3c: 1a
+
+	  a   b   c
+	1 X |   |
+	  ==|===|==
+	2   |   |
+	  ==|===|==
+	3   |   |
+
+	It is the computer turn.
+
+	  a   b   c
+	1 X |   | O
+	  ==|===|==
+	2   |   |
+	  ==|===|==
+	3   |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 2a
+
+	  a   b   c
+	1 X |   | O
+	  ==|===|==
+	2 X |   |
+	  ==|===|==
+	3   |   |
+
+	It is the computer turn.
+
+	  a   b   c
+	1 X |   | O
+	  ==|===|==
+	2 X |   |
+	  ==|===|==
+	3 O |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 2b
+
+	  a   b   c
+	1 X |   | O
+	  ==|===|==
+	2 X | X |
+	  ==|===|==
+	3 O |   |
+
+	It is the computer turn.
+
+	  a   b   c
+	1 X |   | O
+	  ==|===|==
+	2 X | X | O
+	  ==|===|==
+	3 O |   |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 3b
+
+	  a   b   c
+	1 X |   | O
+	  ==|===|==
+	2 X | X | O
+	  ==|===|==
+	3 O | X |
+
+	It is the computer turn.
+
+	  a   b   c
+	1 X | O | O
+	  ==|===|==
+	2 X | X | O
+	  ==|===|==
+	3 O | X |
+
+	It is your turn to move.
+
+	Enter your move. eg. 1a or 3c: 3c
+
+	  a   b   c
+	1 X | O | O
+	  ==|===|==
+	2 X | X | O
+	  ==|===|==
+	3 O | X | X
+
+	The  X 's have won the game!
+
+	It's a TIE!
+
+	Would you like to play again? :)
