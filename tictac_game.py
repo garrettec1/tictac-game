@@ -318,7 +318,7 @@ def main():
                 time.sleep(2.5)
                 print("\n\tThe ",human_piece,"'s have won the game!")
 
-            if turn_count == 10:
+            if (turn_count == 10) and (first_turn != "stop"):
                 first_turn = "stop"
                 time.sleep(1)
                 print("\n\tIt's a TIE!")
@@ -346,7 +346,7 @@ def main():
                 time.sleep(2.5)
                 print("\n\tThe ",comp_piece,"'s have won the game!")
 
-            if turn_count == 10:
+            if (turn_count == 10) and (first_turn != "stop"):
                 first_turn = "stop"
                 time.sleep(.5)
                 print("\n\tIt's a TIE!")
