@@ -269,13 +269,6 @@ def main():
         pytictac.main()
         break"""
 
-    # Using the string 'first' as the return value here is sort of an
-    # awkward interface. It's inherently ambiguous as to what it
-    # means.  Who goes first? Computer or human? The point is you have
-    # to KNOW what flip_for_turn means which probably means looking at the
-    # code.  How could you do it less ambiguously? Ideally the only
-    # thing you have to know about a function is *what* it returns,
-    # not how it derived that information.
     first_turn = flip_for_turn()
 
     print('\n\tHere is the game board.')
@@ -291,18 +284,8 @@ def main():
     turn_count = 1
     victory = False
 
-    # The mess of conditionals inside here is kind of intense. It
-    # looks like it just evolved into the current state through trial
-    # any error (not shocking ;).  But it's level of clarity has
-    # become low.  The usage of the gaming variable seems REALLY all
-    # over the place.  It's confusing that it gets incremented
-    # multiple times throughout this while loop
     while turn_count<10:
 
-        # This was confusing to read.  The words mislead you into
-        # thinking this means "when it's not the first turn".  But
-        # that's not what it means at all. It actually means, "if the
-        # computer is going first."  So it should probably say that ;)
         if first_turn == 'computer':
             move = computer_move(turn_count)
             update_board(move, comp_piece)
