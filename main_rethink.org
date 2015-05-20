@@ -1,0 +1,48 @@
+* Initial thoughts:
+  Okay, going to try some things to see if I can make main more readable.
+  I am going to start by making a detect tie function, as main is currently
+  structured, I need to call it twice, as the game can become tied after either
+  player moves.
+  Next I am going to try to functionalize the move sets. I gain a tiny tiny
+  amount of efficiency by not checking for wins every move, but it might be
+  worthwhile from the point of view of readability to forgo that. I will get
+  some advice on it. Maybe I will make a branch version!
+
+* Second thoughts:
+** first_turn
+  I want to change this more than I initially expected.
+  There are two possible piece states:
+    1. Computer goes first
+       - computer = 'X'
+       - human    = 'O'
+    2. Human goes first
+       - human    = 'X'
+       - computer = 'O'
+  I am currently using first_turn in an awkward way, and only once.
+  I can actually use the piece assignment to determine who goes when.
+** turn_count
+   While turn_count is useful to determine how far along the game is, it's
+   awkward that I am using it to control the main while and determine game state.
+
+   This is why I have break statements. Because turn becoming 10 does not
+   actually stop the game.
+
+   I propose controlling the while with a Bool like continue_game:
+
+** Game phases
+   There are a couple of phases I am paying attention to in the game.
+   1) turns 1-4
+      * first move
+      * NO POSSIBLE WINS OR TIES
+   2) turns 5-9
+      * Possible winning or blocking moves
+   3) turn 10
+      * Possible win
+      * Possible tie
+   I could...
+   1) ignore some differences and squash phases together
+   2) actually detect ties
+   3) make a individual function for each "goes first"
+   4) find a better solution. I want the game to be impervious to who is going
+      first. I want to find a way to make that happen.
+*** turns 1-4
