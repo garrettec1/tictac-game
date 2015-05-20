@@ -295,13 +295,10 @@ def main():
     turn_count = 1
     victory = False
 
-    while turn_count<10:
+    while first_turn == "computer":
+        do_a_computer_move(turn_count, comp_piece)
+        turn_count+=1
 
-        if first_turn == 'computer':
-            move = computer_move(turn_count)
-            update_board(move, comp_piece)
-            draw_grid()
-            turn_count+=1
 
         if turn_count > 4:
             if detect_winning_move(comp_piece):
@@ -314,10 +311,8 @@ def main():
             print("\n\tIt's a TIE!")
             break
 
-        move = get_human_move()
-        update_board(move, human_piece)
-        draw_grid()
-        turn_count += 1
+            do_a_human_move(human_piece)
+            turn_count += 1
 
         if turn_count > 5:
             if detect_winning_move(human_piece):
