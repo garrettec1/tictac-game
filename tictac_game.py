@@ -255,16 +255,6 @@ def play_again():
 
     return(again)
 
-"""Okay, going to try some things to see if I can make main more readable.
-   I am going to start by making a detect tie function, as main is currently
-   structured, I need to call it twice, as the game can become tied after either
-   player moves.
-   Next I am going to try to functionalize the move sets. I gain a tiny tiny
-   amount of efficiency by not checking for wins every move, but it might be
-   worthwhile from the point of view of readability to forgo that. I will get
-   some advice on it. Maybe I will make a branch version!"""
-
-
 ###########################################################################
 # |=========================|| MAIN ||=========================|
 ###########################################################################
