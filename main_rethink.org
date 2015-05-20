@@ -27,7 +27,7 @@
    This is why I have break statements. Because turn becoming 10 does not
    actually stop the game.
 
-   I propose controlling the while with a Bool like continue_game:
+   I propose controlling the while with a Boole like continue_game:
 
 ** Game phases
    There are a couple of phases I am paying attention to in the game.
@@ -46,4 +46,21 @@
    4) find a better solution. I want the game to be impervious to who is going
       first. I want to find a way to make that happen.
 
-*** turns 1-4
+* simplest case mock: two while loops
+  while (first_turn == "human"):
+    ... code for human first game here...
+    first_turn = "false"
+  while (first_turn == "computer"):
+    ... code for computer first game here...
+    first_turn = "stop"
+** Problems with this.
+   1) Using first_turn to enter and end the loop might be confusing.
+      - I could change the name?
+   2) A lot of code duplication. Which is why I rejected something like this
+      initially when writing this.
+      - Proper functions should greatly decrease the amount of repetitious code
+        and increase readability.
+   3) Not ideal because it is not really insensitive to who goes first, it just
+      handles the problem in a more straightforward fashion.
+        - This is code I can write right now, and may illuminate a better
+          solution overall. I will go for it.
