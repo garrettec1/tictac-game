@@ -310,3 +310,7 @@ ValueError: list.remove(x): x not in list
 	It's a TIE!
 
 	Would you like to play again? :)
+** thoughts
+   I think that the problem is in calc_move.
+   It seems to still be stubbed out for when the computer always went first.
+   Actually, it's kind of amazing it took this long to show up as a problem.
