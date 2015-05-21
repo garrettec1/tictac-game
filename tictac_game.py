@@ -141,7 +141,7 @@ def remove_move(move):
             firstMoves.remove(move)
 
 
-def computer_move(turn):
+def computer_move(turn, comp_piece):
     """ Takes the turn_count variable from main as turn.
     The first if and elif handle the first two computer moves in the game.
     calc_move handles all other moves. Returns move as a string. eg: '1a'
@@ -149,28 +149,31 @@ def computer_move(turn):
     time.sleep(.5)
     print("\n\tIt is the computer turn.")
 
-    #only takes from first move when is goes first or third? have to revisit this.
     if turn == 1:
         move = random.choice(firstMoves)
     elif turn == 3:
         move = random.choice(firstMoves)
     else:
-        move = calc_move()
+        move = calc_move(comp_piece)
 
     return(move)
 
 
-def calc_move():
+def calc_move(comp_piece):
     """ Calls winBlock twice. First to find the winning move as the computer, if that
     does not return a valid move, it finds a move to block a winning move.
     If there are no winning moves or moves to be blocked. The computer takes the
     remaining corner.
     """
+    if comp_piece == 'X':
+        human_piece = '0'
+    else:
+        human_piece = 'X'
 
-    move = win_block('X')
+    move = win_block(comp_piece)
 
     if move not in availableMoves:
-        move = win_block('O')
+        move = win_block(human_piece)
 
         if move not in availableMoves:
             move = random.choice(firstMoves)
@@ -261,7 +264,7 @@ def do_a_human_move(human_piece):
     draw_grid()
 
 def do_a_computer_move(turn_count, comp_piece):
-    move = computer_move(turn_count)
+    move = computer_move(turn_count, comp_piece)
     update_board(move, comp_piece)
     draw_grid()
 
