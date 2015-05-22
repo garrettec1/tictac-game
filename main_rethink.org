@@ -1,3 +1,25 @@
+* This Branch
+** Big problems
+   - Reliance on turn counter
+     Relying on the turn counter is problematic because it increases complexity
+     and greatly decreases my ability to alter the code without serious
+     ramifications
+   - win_block
+     I structured win_block to return a move that would fail the legal move test
+     and then run again to find a blocking move. This worked great for the
+     current implimentation of the code, but is not reuseable in any way shape or
+     form. I might be able to fix this, but it does not solve the more
+     fundemental issues inherent in the code.
+   - AI
+     The computer AI is flawed. Again, fixable, but does not solve overall issues
+     with complexity and readability
+** Solution?
+   - I need to gut the AI, and fundamentally change the way the human and computer
+     interact with the board. They should interface with the board in the same
+     way. This will make things clearer.
+   - Also I need some kind of algorithm that will do the move decisions for the
+     computer 100% regardless of the state of the board. Not sure how to go
+     about that, but one problem at a time.
 * Initial thoughts:
   Okay, going to try some things to see if I can make main more readable.
   I am going to start by making a detect tie function, as main is currently
