@@ -93,7 +93,6 @@ def draw_row(row_index):
                                      board[row_number +'b'], board[row_number +'c']))
 
 
-
 def check_move(move):
     """checks to see if a move is legal. Takes move string as parameter.
     Returns Boolean"""
@@ -143,6 +142,9 @@ def play_again():
     again = str(input("\n\ty or n: ")).lower()
 
     return(again)
+
+
+def get_move():
 
 ###########################################################################
 # |=========================|| MAIN ||=========================|

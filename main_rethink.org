@@ -1,3 +1,25 @@
+* AI rework notes
+** You might notice some changes...
+   You might have noticed that I have completely nuked the AI. Weirdly enough
+   this is the best path forward. Here is what I have concluded
+   * The way I had set up the game was needlessly complex.
+   * The path to freedom from this complexity is to remove all decision making
+     from the main part of the program. The minute I try to code what happens
+     when human goes first, or computer goes first, I lock myself back into the
+     exact same complexity I am trying to abolish
+** The solution
+   * OBJECTS!
+   * Most importantly a player object whos constructor takes an argument about
+     whether this player is human or computer. The player object will know how
+     to handle making a move itself.
+   * THIS IS DIFFICULT... and good. ;)
+     1. If I am going to have player objects, that encourages me to hide
+        information from them. To keep them from knowing things they shouldn't
+        I need of objectify the game board and things like that.
+     2. I really need to do a bit of studying first.
+** So I will be putting implementing this idea on hold a little bit.
+   I will be popping in when I think I have figured out some goodness to
+   implement.
 * Initial thoughts:
   Okay, going to try some things to see if I can make main more readable.
   I am going to start by making a detect tie function, as main is currently
