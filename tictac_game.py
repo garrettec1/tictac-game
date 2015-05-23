@@ -168,7 +168,16 @@ def main():
     turn_count = 1
     victory = False
 
+    while victory == False:
 
+
+        #Get a move
+        #Check if legal
+        #Update board
+        #draw board
+        #check win
+
+        victory = True
 
 if __name__ == "__main__":
     """must use C-u C-c C-c to run in e-macs. Something complex going on here"""
