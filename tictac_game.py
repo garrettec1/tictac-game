@@ -141,25 +141,6 @@ def remove_move(move):
             firstMoves.remove(move)
 
 
-def computer_move(turn):
-    """ Takes the turn_count variable from main as turn.
-    The first if and elif handle the first two computer moves in the game.
-    calc_move handles all other moves. Returns move as a string. eg: '1a'
-    """
-    time.sleep(.5)
-    print("\n\tIt is the computer turn.")
-
-    #only takes from first move when is goes first or third? have to revisit this.
-    if turn == 1:
-        move = random.choice(firstMoves)
-    elif turn == 3:
-        move = random.choice(firstMoves)
-    else:
-        move = calc_move()
-
-    return(move)
-
-
 def calc_move():
     """ Calls winBlock twice. First to find the winning move as the computer, if that
     does not return a valid move, it finds a move to block a winning move.
