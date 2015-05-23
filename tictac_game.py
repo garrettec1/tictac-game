@@ -92,15 +92,6 @@ def draw_row(row_index):
     print("\t{} {} | {} | {}".format(row_number, board[row_number +'a'],
                                      board[row_number +'b'], board[row_number +'c']))
 
-# I think that isolating the input code is good. But it seems a bit
-# strange to also have this modify the availableMoves list, and check
-# whether it's a valid move.  I would probably put this into a
-# separate function that actually makes a move. Then the updating the
-# board and the updating of the legal move step are tied together.
-# This is appropriate since they are actualy just different views of
-# the same data. Having them updated at different points in the code
-# and by different functions means that it would be much easier for
-# them to get out of sync. Same for firstMoves
 def get_human_move():
     """Gets input from player, loops over check_move till that returns true.
     Returns the Human Move as a string: eg. '1a'
