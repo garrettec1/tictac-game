@@ -206,25 +206,7 @@ def win_block(piece):
     return(move)
 
 
-def detect_winning_move(piece):
-    """Takes piece from main. A string 'X' or 'O'
-    Structured like win_block() with two for loops. Returns victory Bool as True if
-    the game has been won.
-    """
 
-    victory = False
-
-    for set in winConditions:
-        counter = 0
-        for squares in set:
-            if board[squares] == piece:
-                counter += 1
-
-            if counter == 3:
-                victory = True
-                break
-
-    return(victory)
 
 
 def update_board(move, piece):
