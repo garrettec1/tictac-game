@@ -116,24 +116,6 @@ def remove_move(move):
             firstMoves.remove(move)
 
 
-def calc_move():
-    """ Calls winBlock twice. First to find the winning move as the computer, if that
-    does not return a valid move, it finds a move to block a winning move.
-    If there are no winning moves or moves to be blocked. The computer takes the
-    remaining corner.
-    """
-
-    move = win_block('X')
-
-    if move not in availableMoves:
-        move = win_block('O')
-
-        if move not in availableMoves:
-            move = random.choice(firstMoves)
-
-    return(move)
-
-
 def update_board(move, piece):
     """Takes move, a string '1a' and piece 'X' or 'O' from main. Updates the
     game board and calls remove_move to depopulate used moves.
