@@ -92,22 +92,6 @@ def draw_row(row_index):
     print("\t{} {} | {} | {}".format(row_number, board[row_number +'a'],
                                      board[row_number +'b'], board[row_number +'c']))
 
-def get_human_move():
-    """Gets input from player, loops over check_move till that returns true.
-    Returns the Human Move as a string: eg. '1a'
-    """
-
-    legal_move = False
-    time.sleep(.5)
-    print("\n\tIt is your turn to move.")
-    time.sleep(.5)
-
-    while (not legal_move):
-        moving = str(input("\n\tEnter your move. eg. 1a or 3c: "))
-        move = moving.lower()
-        legal_move = check_move(move)
-
-    return(move)
 
 
 def check_move(move):
