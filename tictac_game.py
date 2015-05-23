@@ -160,13 +160,15 @@ def main():
 
     #commented out for refactoring of game cycle
     #first_turn = flip_for_turn()
-
+    print("This is a version for two human players.")
     print('\n\tHere is the game board.')
     draw_grid()
 
-
     turn_count = 1
     victory = False
+
+    next_piece = {'X' : 'O', 'O' : 'X'}
+    game_piece = 'O'
 
     while victory == False:
 
