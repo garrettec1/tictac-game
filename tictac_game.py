@@ -178,37 +178,6 @@ def calc_move():
     return(move)
 
 
-def win_block(piece):
-    """ Takes piece passed from calcMove, a string 'X' or 'O'. move is assigned zero
-    so that if a valid move is not found, win_block returns an invalid move.
-    Uses a for loop to pull 3 tuples of win conditions from winConditions[] then a for loop to
-    check the state of each location. It returns the location of the empty space.
-    """
-
-    move = 0
-
-    for three_in_a_row in winConditions:
-        empty = 0
-        counter = 0
-        for square in three_in_a_row:
-            if board[square] == piece:
-                counter+=1
-
-            if board[square] == ' ':
-                empty = square
-
-            if counter == 2 and empty != ' ':
-                move = empty
-
-            if move in availableMoves:
-                break
-
-    return(move)
-
-
-
-
-
 def update_board(move, piece):
     """Takes move, a string '1a' and piece 'X' or 'O' from main. Updates the
     game board and calls remove_move to depopulate used moves.
