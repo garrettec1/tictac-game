@@ -284,42 +284,7 @@ def main():
     turn_count = 1
     victory = False
 
-    while turn_count<10:
 
-        if first_turn == 'computer':
-            move = computer_move(turn_count)
-            update_board(move, comp_piece)
-            draw_grid()
-            turn_count+=1
-
-        if turn_count > 4:
-            if detect_winning_move(comp_piece):
-                time.sleep(2.5)
-                print("\n\tThe ",comp_piece,"'s have won the game!")
-                break
-
-        if turn_count == 10:
-            time.sleep(.5)
-            print("\n\tIt's a TIE!")
-            break
-
-        move = get_human_move()
-        update_board(move, human_piece)
-        draw_grid()
-        turn_count += 1
-
-        if turn_count > 5:
-            if detect_winning_move(human_piece):
-                time.sleep(2.5)
-                print("\n\tThe ",human_piece,"'s have won the game!")
-                break
-
-        if turn_count == 10:
-            time.sleep(1)
-            print("\n\tIt's a TIE!")
-            break
-
-        turn = 'none'
 
 if __name__ == "__main__":
     """must use C-u C-c C-c to run in e-macs. Something complex going on here"""
