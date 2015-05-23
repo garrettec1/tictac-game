@@ -35,9 +35,9 @@ firstMoves =['1a','1c','3a','3c']
  depopulates as the moves are used like leagalMoves.
 """
 
-
-def flip_for_turn():
-    """uses random choice to choose between h or t and prints the result to screen"""
+# commented out for refactoring of game cycle
+"""def flip_for_turn():
+    uses random choice to choose between h or t and prints the result to screen"
     #call it in the air? Funny statement if user waits too long.
 
     time.sleep(.5)
@@ -60,7 +60,7 @@ def flip_for_turn():
         turn = 'computer'
     time.sleep(.5)
 
-    return(turn)
+    return(turn)"""
 
 
 def draw_grid():
@@ -176,17 +176,12 @@ def main():
         pytictac.main()
         break"""
 
-    first_turn = flip_for_turn()
+    #commented out for refactoring of game cycle
+    #first_turn = flip_for_turn()
 
     print('\n\tHere is the game board.')
     draw_grid()
 
-    if first_turn == 'human':
-        human_piece = 'X'
-        comp_piece = 'O'
-    else:
-        human_piece = 'O'
-        comp_piece = 'X'
 
     turn_count = 1
     victory = False
